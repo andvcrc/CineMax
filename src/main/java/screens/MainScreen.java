@@ -4,15 +4,18 @@
  */
 package screens;
 
+import java.awt.Component;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andre
  */
 public class MainScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainScreen
-     */
+    CadastroFilmes cadFilmes = new CadastroFilmes();
+    ConsultaFilmes conFilmes = new ConsultaFilmes();
+    
     public MainScreen() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
@@ -65,6 +68,8 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanel1.add(jSeparator1);
 
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/copyright.png"))); // NOI18N
         jLabel2.setText("CineMax - Desenvolvido por André Victor Ribeiro Carvalho");
         jPanel1.add(jLabel2);
 
@@ -78,13 +83,14 @@ public class MainScreen extends javax.swing.JFrame {
         );
         telaDesktopLayout.setVerticalGroup(
             telaDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/registro.png"))); // NOI18N
         jMenu1.setText("Cadastros   |");
-        jMenu1.setMinimumSize(new java.awt.Dimension(85, 38));
-        jMenu1.setPreferredSize(new java.awt.Dimension(125, 38));
+        jMenu1.setMaximumSize(new java.awt.Dimension(114, 38));
+        jMenu1.setMinimumSize(new java.awt.Dimension(114, 38));
+        jMenu1.setPreferredSize(new java.awt.Dimension(114, 38));
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/filme.png"))); // NOI18N
         jMenu4.setText("Filmes");
@@ -100,6 +106,11 @@ public class MainScreen extends javax.swing.JFrame {
 
         consultaFilmes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
         consultaFilmes.setText("Consultar");
+        consultaFilmes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaFilmesActionPerformed(evt);
+            }
+        });
         jMenu4.add(consultaFilmes);
 
         jMenu1.add(jMenu4);
@@ -196,6 +207,11 @@ public class MainScreen extends javax.swing.JFrame {
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sair.png"))); // NOI18N
         jMenu6.setText("Sair");
         jMenu6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
@@ -231,11 +247,27 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void cadastroFilmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroFilmesActionPerformed
-        // TODO add your handling code here:
-        CadastroFilmes cadFilmes = new CadastroFilmes();
-        telaDesktop.add(cadFilmes);
-        cadFilmes.setVisible(true);
+        if(cadFilmes.isVisible()) {
+            cadFilmes.toFront();
+            cadFilmes.requestFocus();
+        } else {
+            centralizaJif(cadFilmes);
+        }
     }//GEN-LAST:event_cadastroFilmesActionPerformed
+
+    private void consultaFilmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaFilmesActionPerformed
+        if(conFilmes.isVisible()) {
+            conFilmes.toFront();
+            conFilmes.requestFocus();
+        } else {
+            centralizaJif(conFilmes);
+        }
+    }//GEN-LAST:event_consultaFilmesActionPerformed
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenu6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -270,6 +302,12 @@ public class MainScreen extends javax.swing.JFrame {
                 new MainScreen().setVisible(true);
             }
         });
+    }
+
+    public void centralizaJif(Component jif) {
+        telaDesktop.add(jif);
+        jif.setLocation((telaDesktop.getWidth() - jif.getWidth()) / 2, (telaDesktop.getHeight() - jif.getHeight()) / 2);
+        jif.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
