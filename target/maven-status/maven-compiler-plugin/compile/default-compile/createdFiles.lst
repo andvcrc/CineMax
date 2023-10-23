@@ -6,6 +6,7 @@ screens\MainScreen$2.class
 screens\Login.class
 screens\CadastroFilmes$1.class
 entities\Sessao.class
+screens\ConsultaFilmes$1.class
 screens\Login$2.class
 entities\Ingresso.class
 screens\ConsultaFilmes.class
