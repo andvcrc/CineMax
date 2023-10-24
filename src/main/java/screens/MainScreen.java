@@ -6,6 +6,7 @@ package screens;
 
 import java.awt.Component;
 import javax.swing.JOptionPane;
+import managers.GerenciaFilme;
 
 /**
  *
@@ -13,8 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class MainScreen extends javax.swing.JFrame {
 
-    CadastroFilmes cadFilmes = new CadastroFilmes();
-    ConsultaFilmes conFilmes = new ConsultaFilmes();
+    GerenciaFilme getFilmes = new GerenciaFilme();
+    CadastroFilmes cadFilmes = new CadastroFilmes(getFilmes);
+    ConsultaFilmes conFilmes = new ConsultaFilmes(getFilmes);
     
     public MainScreen() {
         initComponents();
@@ -30,6 +32,9 @@ public class MainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu9 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -60,6 +65,12 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
+        jMenu9.setText("File");
+        jMenuBar2.add(jMenu9);
+
+        jMenu10.setText("Edit");
+        jMenuBar2.add(jMenu10);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CineMax");
         setBackground(new java.awt.Color(255, 255, 255));
@@ -88,9 +99,9 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/registro.png"))); // NOI18N
         jMenu1.setText("Cadastros   |");
-        jMenu1.setMaximumSize(new java.awt.Dimension(114, 38));
-        jMenu1.setMinimumSize(new java.awt.Dimension(114, 38));
-        jMenu1.setPreferredSize(new java.awt.Dimension(114, 38));
+        jMenu1.setMaximumSize(new java.awt.Dimension(110, 38));
+        jMenu1.setMinimumSize(new java.awt.Dimension(110, 38));
+        jMenu1.setPreferredSize(new java.awt.Dimension(110, 38));
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/filme.png"))); // NOI18N
         jMenu4.setText("Filmes");
@@ -321,6 +332,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultaSessao;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -328,7 +340,9 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

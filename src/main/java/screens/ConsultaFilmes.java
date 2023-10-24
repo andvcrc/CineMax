@@ -4,6 +4,7 @@
  */
 package screens;
 
+import entities.Filme;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -15,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import managers.GerenciaFilme;
 
 /**
  *
@@ -25,7 +27,9 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     /**
      * Creates new form CadastroFilmes
      */
-    public ConsultaFilmes() {
+    GerenciaFilme gerFilme;
+    public ConsultaFilmes(GerenciaFilme gerFilme) {
+        this.gerFilme = gerFilme;
         initComponents();
        // Dimension dimensao = lblCartaz.getSize();
         //lblCartaz.setMaximumSize(dimensao);
@@ -44,33 +48,34 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        cadFilmeTitulo = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cadFilmeCmb = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        cadFilmeDiretor = new javax.swing.JTextField();
+        txtDiretor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        cadFilmeGenero = new javax.swing.JTextField();
+        txtGenero = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        cadFilmeDuracao = new javax.swing.JTextField();
+        txtDuracao = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        cadFilmeAno = new javax.swing.JTextField();
+        txtAno = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cadFilmeSinopse = new javax.swing.JTextArea();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnConfirmar1 = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
         btnConfirmar2 = new javax.swing.JButton();
         btnImagem = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setForeground(java.awt.Color.white);
+        setIconifiable(true);
         setTitle("Cadastro de Filmes");
-        setMaximumSize(new java.awt.Dimension(630, 600));
-        setMinimumSize(new java.awt.Dimension(630, 600));
-        setPreferredSize(new java.awt.Dimension(630, 600));
+        setMaximumSize(new java.awt.Dimension(636, 600));
+        setMinimumSize(new java.awt.Dimension(636, 600));
+        setPreferredSize(new java.awt.Dimension(636, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -81,8 +86,8 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Título:");
 
-        cadFilmeTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        cadFilmeTitulo.setEnabled(false);
+        txtTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtTitulo.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setText("Classificação:");
@@ -94,26 +99,26 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("Diretor:");
 
-        cadFilmeDiretor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        cadFilmeDiretor.setEnabled(false);
+        txtDiretor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtDiretor.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setText("Gênero:");
 
-        cadFilmeGenero.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        cadFilmeGenero.setEnabled(false);
+        txtGenero.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtGenero.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel6.setText("Duração (hh:mm):");
 
-        cadFilmeDuracao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        cadFilmeDuracao.setEnabled(false);
+        txtDuracao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtDuracao.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel7.setText("Ano:");
 
-        cadFilmeAno.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        cadFilmeAno.setEnabled(false);
+        txtAno.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtAno.setEnabled(false);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel8.setText("Sinopse:");
@@ -134,9 +139,14 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnCancelar.setText("Excluir");
         btnCancelar.setEnabled(false);
 
-        btnConfirmar1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnConfirmar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
-        btnConfirmar1.setText("Pesquisar");
+        btnConsultar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
+        btnConsultar.setText("Pesquisar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         btnConfirmar2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnConfirmar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editar.png"))); // NOI18N
@@ -173,31 +183,31 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
-                                        .addComponent(cadFilmeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel7)
                                             .addGap(18, 18, 18)
-                                            .addComponent(cadFilmeAno, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel6)
                                             .addGap(18, 18, 18)
-                                            .addComponent(cadFilmeDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jLabel3)
                                                 .addComponent(jLabel5))
                                             .addGap(18, 18, 18)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(cadFilmeGenero)
+                                                .addComponent(txtGenero)
                                                 .addComponent(cadFilmeCmb, 0, 181, Short.MAX_VALUE))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(18, 18, 18)
-                                        .addComponent(cadFilmeDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txtDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(btnConfirmar1)
+                                    .addComponent(btnConsultar)
                                     .addGap(18, 18, 18)
                                     .addComponent(btnConfirmar2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -219,14 +229,14 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(cadFilmeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(cadFilmeDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cadFilmeAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -235,11 +245,11 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(cadFilmeGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(cadFilmeDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(btnImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -252,7 +262,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelar)
                     .addComponent(btnConfirmar2)
-                    .addComponent(btnConfirmar1))
+                    .addComponent(btnConsultar))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -291,20 +301,26 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnImagemActionPerformed
 
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        // TODO add your handling code here:
+        int codigo = 0;
+        Filme filme = gerFilme.consultar(codigo);
+        txtAno.setText(String.valueOf(filme.getAno()));
+        txtTitulo.setText(filme.getTitulo());
+        txtDiretor.setText(filme.getDiretor());
+        txtDuracao.setText(String.valueOf(filme.getDuracao()));
+        txtGenero.setText(filme.getGenero());
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnConfirmar1;
     private javax.swing.JButton btnConfirmar2;
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnImagem;
-    private javax.swing.JTextField cadFilmeAno;
     private javax.swing.JComboBox<String> cadFilmeCmb;
-    private javax.swing.JTextField cadFilmeDiretor;
-    private javax.swing.JTextField cadFilmeDuracao;
-    private javax.swing.JTextField cadFilmeGenero;
     private javax.swing.JTextArea cadFilmeSinopse;
-    private javax.swing.JTextField cadFilmeTitulo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -316,5 +332,10 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField txtAno;
+    private javax.swing.JTextField txtDiretor;
+    private javax.swing.JTextField txtDuracao;
+    private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }
