@@ -7,6 +7,7 @@ package screens;
 import entities.Filme;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.FileChooserUI;
 import managers.GerenciaFilme;
 
@@ -17,6 +18,7 @@ import managers.GerenciaFilme;
 public class CadastroFilmes extends javax.swing.JInternalFrame {
 
     private GerenciaFilme gerFilme;
+    File cartaz;
     /**
      * Creates new form CadastroFilmes
      */
@@ -252,17 +254,18 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
-        JFileChooser jfc = new JFileChooser();
-        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        jfc.showOpenDialog(this);
-        File file = jfc.getSelectedFile();
-        btnSelecionar.setText(file.getName());
+        JFileChooser navegador = new JFileChooser();
+        navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        navegador.showOpenDialog(this);
+        cartaz = navegador.getSelectedFile();
+        btnSelecionar.setText(cartaz.getName());
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here
-        Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedItem().toString(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()));
+        Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedItem().toString(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), cartaz.getPath());
         gerFilme.adicionar(filme);
+        JOptionPane.showMessageDialog(this, cartaz.getPath());
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
 

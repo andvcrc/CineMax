@@ -285,16 +285,14 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         JFileChooser navegador = new JFileChooser();
         navegador.setDialogTitle("Escolha a nova imagem para o cartaz:");
         navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
         int retorno = navegador.showOpenDialog(this);
-
+        
         if (retorno == JFileChooser.APPROVE_OPTION) {
             BufferedImage imagem;
             File file = navegador.getSelectedFile();
             try {
-           
                 imagem = ImageIO.read(file);
-                btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 260, 100)));
+                btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 860, 100)));
             } catch (IOException ex) {
                 Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -310,6 +308,15 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         txtDiretor.setText(filme.getDiretor());
         txtDuracao.setText(String.valueOf(filme.getDuracao()));
         txtGenero.setText(filme.getGenero());
+        BufferedImage imagem;
+        File file = new File(filme.getCaminho()); 
+            try {
+                imagem = ImageIO.read(file);
+                btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 260, 100)));
+            } catch (IOException ex) {
+                Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
     }//GEN-LAST:event_btnConsultarActionPerformed
 
 

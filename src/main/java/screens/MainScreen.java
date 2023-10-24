@@ -14,9 +14,9 @@ import managers.GerenciaFilme;
  */
 public class MainScreen extends javax.swing.JFrame {
 
-    GerenciaFilme getFilmes = new GerenciaFilme();
-    CadastroFilmes cadFilmes = new CadastroFilmes(getFilmes);
-    ConsultaFilmes conFilmes = new ConsultaFilmes(getFilmes);
+    GerenciaFilme gerFilmes = new GerenciaFilme();
+    CadastroFilmes cadFilmes = new CadastroFilmes(gerFilmes);
+    ConsultaFilmes conFilmes = new ConsultaFilmes(gerFilmes);
     
     public MainScreen() {
         initComponents();

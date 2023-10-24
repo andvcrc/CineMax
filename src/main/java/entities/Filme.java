@@ -4,6 +4,8 @@
  */
 package entities;
 
+import java.nio.file.Path;
+
 /**
  *
  * @author Andre
@@ -17,11 +19,12 @@ public class Filme {
     private String clasIndicativa;
     private int ano;
     private int duracao;
+    private String caminhoImagem;
 
     public Filme() {
     }
 
-    public Filme(int codFilme, String titulo, String genero, String sinopse, String diretor, String clasIndicativa, int ano, int duracao) {
+    public Filme(int codFilme, String titulo, String genero, String sinopse, String diretor, String clasIndicativa, int ano, int duracao, String caminhoImagem) {
         this.codFilme = codFilme;
         this.titulo = titulo;
         this.genero = genero;
@@ -30,9 +33,10 @@ public class Filme {
         this.clasIndicativa = clasIndicativa;
         this.ano = ano;
         this.duracao = duracao;
+        this.caminhoImagem = caminhoImagem;
     }
 
-    public Filme(String titulo, String genero, String sinopse, String diretor, String clasIndicativa, int ano, int duracao) {
+    public Filme(String titulo, String genero, String sinopse, String diretor, String clasIndicativa, int ano, int duracao, String caminhoImagem) {
         this.titulo = titulo;
         this.genero = genero;
         this.sinopse = sinopse;
@@ -40,6 +44,7 @@ public class Filme {
         this.clasIndicativa = clasIndicativa;
         this.ano = ano;
         this.duracao = duracao;
+        this.caminhoImagem = caminhoImagem;
     }
 
     public int getCodFilme() {
@@ -104,6 +109,14 @@ public class Filme {
 
     public void setDuracao(int duracao) {
         this.duracao = duracao;
+    }
+    
+    public String getCaminho() {
+        return caminhoImagem;
+    }
+
+    public void setCaminho(String caminho) {
+        this.caminhoImagem = caminho;
     }
     
     
