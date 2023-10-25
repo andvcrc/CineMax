@@ -27,4 +27,8 @@ public class GerenciaFilme {
         return (listaFilme.get(codigo));
     }
     
+    public ArrayList<Filme> relatorio () {
+        return listaFilme;
+    }
+    
 }

@@ -8,6 +8,8 @@ import entities.Filme;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.FileChooserUI;
 import managers.GerenciaFilme;
 
@@ -83,7 +85,8 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         jLabel3.setText("Classificação:");
 
         cmbClassificacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        cmbClassificacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Livre", "10 Anos", "12 Anos", "14 Anos", "16 Anos", "18 Anos" }));
+        cmbClassificacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livre", "10 Anos", "12 Anos", "14 Anos", "16 Anos", "18 Anos" }));
+        cmbClassificacao.setToolTipText("Selecione");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("Diretor:");
@@ -260,10 +263,14 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
         JFileChooser navegador = new JFileChooser();
+        FileFilter[] removeFiltroDefault = navegador.getChoosableFileFilters();
+        navegador.removeChoosableFileFilter(removeFiltroDefault[0]);
+        navegador.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
         navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
         navegador.showOpenDialog(this);
         cartaz = navegador.getSelectedFile();
-        btnSelecionar.setText(cartaz.getName());
+        if(cartaz != null)
+            btnSelecionar.setText(cartaz.getName());
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed

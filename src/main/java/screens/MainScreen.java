@@ -16,8 +16,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     GerenciaFilme gerFilmes = new GerenciaFilme();
     CadastroFilmes cadFilmes = new CadastroFilmes(gerFilmes);
-    ConsultaFilmes conFilmes = new ConsultaFilmes(gerFilmes);
-    
+
     public MainScreen() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
@@ -258,7 +257,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void cadastroFilmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroFilmesActionPerformed
-        if(cadFilmes.isVisible()) {
+        if (cadFilmes.isVisible()) {
             cadFilmes.toFront();
             cadFilmes.requestFocus();
         } else {
@@ -267,11 +266,17 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastroFilmesActionPerformed
 
     private void consultaFilmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaFilmesActionPerformed
-        if(conFilmes.isVisible()) {
-            conFilmes.toFront();
-            conFilmes.requestFocus();
+
+        if (gerFilmes.relatorio().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum filme cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
         } else {
-            centralizaJif(conFilmes);
+            ConsultaFilmes conFilmes = new ConsultaFilmes(gerFilmes);
+            if (conFilmes.isVisible()) {
+                conFilmes.toFront();
+                conFilmes.requestFocus();
+            } else {
+                centralizaJif(conFilmes);
+            }
         }
     }//GEN-LAST:event_consultaFilmesActionPerformed
 

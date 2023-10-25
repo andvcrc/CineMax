@@ -7,11 +7,11 @@ screens\MainScreen$2.class
 managers\GerenciaFilme.class
 screens\Login.class
 screens\CadastroFilmes$1.class
-.netbeans_automatic_build
 entities\Sessao.class
 screens\ConsultaFilmes$1.class
 screens\Login$2.class
 entities\Ingresso.class
+screens\ConsultaFilmes$3.class
 screens\ConsultaFilmes.class
 screens\CadastroFilmes$2.class
 screens\MainScreen$5.class
@@ -19,6 +19,7 @@ screens\MainScreen$1.class
 entities\Filme.class
 entities\Produto.class
 entities\Pessoa.class
+screens\ConsultaFilmes$4.class
 screens\MainScreen$6.class
 screens\MainScreen.class
 screens\MainScreen$3.class

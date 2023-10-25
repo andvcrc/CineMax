@@ -8,11 +8,14 @@ import entities.Filme;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import managers.GerenciaFilme;
 
 /**
@@ -25,11 +28,15 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
      * Creates new form CadastroFilmes
      */
     GerenciaFilme gerFilme;
+    String imagemDefault = "src/main/resources/images/cartaz.png";
+
     public ConsultaFilmes(GerenciaFilme gerFilme) {
         this.gerFilme = gerFilme;
         initComponents();
         estadoInicial();
-       // Dimension dimensao = lblCartaz.getSize();
+        gerFilme.relatorio().forEach(el -> cmbSelecionarFilme.addItem(el.getTitulo()));
+
+        // Dimension dimensao = lblCartaz.getSize();
         //lblCartaz.setMaximumSize(dimensao);
     }
 
@@ -48,7 +55,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cadFilmeCmb = new javax.swing.JComboBox<>();
+        cmbClassificacao = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txtDiretor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -64,15 +71,20 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnConsultar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnImagem = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        cmbSelecionarFilme = new javax.swing.JComboBox<>();
+        jSeparator2 = new javax.swing.JSeparator();
+        btnEditar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setForeground(java.awt.Color.white);
         setIconifiable(true);
         setTitle("Cadastro de Filmes");
-        setMaximumSize(new java.awt.Dimension(650, 600));
-        setMinimumSize(new java.awt.Dimension(650, 600));
-        setPreferredSize(new java.awt.Dimension(650, 600));
+        setMaximumSize(new java.awt.Dimension(650, 730));
+        setMinimumSize(new java.awt.Dimension(650, 730));
+        setPreferredSize(new java.awt.Dimension(650, 730));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -89,9 +101,10 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setText("Classificação:");
 
-        cadFilmeCmb.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        cadFilmeCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Livre", "10 Anos", "12 Anos", "14 Anos", "16 Anos", "18 Anos" }));
-        cadFilmeCmb.setEnabled(false);
+        cmbClassificacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbClassificacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livre", "10 Anos", "12 Anos", "14 Anos", "16 Anos", "18 Anos" }));
+        cmbClassificacao.setToolTipText("Selecione");
+        cmbClassificacao.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("Diretor:");
@@ -130,6 +143,11 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirme.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnConsultar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
@@ -144,11 +162,38 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cartaz.png"))); // NOI18N
+        btnImagem.setMaximumSize(new java.awt.Dimension(180, 260));
+        btnImagem.setMinimumSize(new java.awt.Dimension(180, 260));
+        btnImagem.setPreferredSize(new java.awt.Dimension(180, 260));
         btnImagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImagemActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
+        jLabel10.setText("Selecione um filme:");
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel9.setText("Cartaz:");
+
+        cmbSelecionarFilme.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbSelecionarFilme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+
+        btnEditar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -158,62 +203,83 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(545, 545, 545))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(67, 67, 67)
+                                .addContainerGap()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel10)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel7)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel3)
-                                                .addComponent(jLabel5))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtGenero)
-                                                .addComponent(cadFilmeCmb, 0, 181, Short.MAX_VALUE))))
+                                        .addComponent(cmbSelecionarFilme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnConsultar))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel8))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(btnExcluir)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(btnConsultar)
-                                    .addGap(82, 82, 82)
-                                    .addComponent(btnExcluir)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(btnEditar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel7)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(cmbClassificacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addGap(11, 11, 11))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConsultar)
+                    .addComponent(jLabel10)
+                    .addComponent(cmbSelecionarFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jLabel9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -230,7 +296,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(cadFilmeCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbClassificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -241,26 +307,24 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                             .addComponent(txtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(btnImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(13, 13, 13)
+                        .addComponent(btnImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExcluir)
-                    .addComponent(btnConsultar)
-                    .addComponent(btnSalvar))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(btnSalvar)
+                    .addComponent(btnEditar))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,15 +338,20 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         JFileChooser navegador = new JFileChooser();
         navegador.setDialogTitle("Escolha a nova imagem para o cartaz:");
+
+        FileFilter[] removeFiltroDefault = navegador.getChoosableFileFilters();
+        navegador.removeChoosableFileFilter(removeFiltroDefault[0]);
+        navegador.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
         navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
         int retorno = navegador.showOpenDialog(this);
-        
+
         if (retorno == JFileChooser.APPROVE_OPTION) {
             BufferedImage imagem;
             File file = navegador.getSelectedFile();
             try {
                 imagem = ImageIO.read(file);
-                btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 860, 100)));
+                btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 260, 100)));
             } catch (IOException ex) {
                 Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -298,17 +367,34 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         txtDuracao.setText(String.valueOf(filme.getDuracao()));
         txtGenero.setText(filme.getGenero());
         txtSinopse.setText(filme.getSinopse());
-        cadFilmeCmb.setSelectedIndex(filme.getPosClasIndicativa());
-        BufferedImage imagem;
-        File file = new File(filme.getCaminhoImagem()); 
-            try {
-                imagem = ImageIO.read(file);
-                btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 260, 100)));
-            } catch (IOException ex) {
-                Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        estadoAposPesquisa();
+        cmbClassificacao.setSelectedIndex(filme.getPosClasIndicativa());
+        carregaImagem(filme.getCaminhoImagem());
+        estadoPesquisa();
     }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+
+        estadoPosEditarSalvar();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        estadoEditar();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        estadoInicial();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    public boolean confereLista(ArrayList<Filme> listaFilmes) {
+        if (listaFilmes.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     public void limparCampos() {
         txtAno.setText("");
@@ -317,9 +403,9 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         txtGenero.setText("");
         txtSinopse.setText("");
         txtTitulo.setText("");
-        cadFilmeCmb.setSelectedIndex(0);
+        cmbClassificacao.setSelectedIndex(0);
     }
-    
+
     public void estadoInicial() {
         limparCampos();
         txtAno.setEnabled(false);
@@ -329,13 +415,36 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         txtSinopse.setEnabled(false);
         txtTitulo.setEnabled(false);
         btnExcluir.setEnabled(false);
-        cadFilmeCmb.setEnabled(false);
+        cmbClassificacao.setEnabled(false);
+        cmbClassificacao.setSelectedIndex(0);
         btnSalvar.setEnabled(false);
         btnImagem.setEnabled(false);
+        btnEditar.setEnabled(false);
+        carregaImagem(imagemDefault);
     }
     
-    public void estadoAposPesquisa() {
-        cadFilmeCmb.setEnabled(true);
+    public void estadoPosEditarSalvar() {
+        txtAno.setEnabled(false);
+        txtDiretor.setEnabled(false);
+        txtDuracao.setEnabled(false);
+        txtGenero.setEnabled(false);
+        txtSinopse.setEnabled(false);
+        txtTitulo.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        cmbClassificacao.setEnabled(false);
+        cmbClassificacao.setSelectedIndex(0);
+        btnSalvar.setEnabled(false);
+        btnImagem.setEnabled(false);
+        btnEditar.setEnabled(true);
+    }
+    
+    public void estadoPesquisa() {
+        btnEditar.setEnabled(true);
+    }
+
+    public void estadoEditar() {
+        btnEditar.setEnabled(false);
+        cmbClassificacao.setEnabled(true);
         txtAno.setEnabled(true);
         txtDiretor.setEnabled(true);
         txtDuracao.setEnabled(true);
@@ -347,13 +456,36 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnImagem.setEnabled(true);
     }
 
+    public void carregaImagem(String caminhoImagem) {
+        BufferedImage imagem;
+        File file = new File(caminhoImagem);
+        if (!caminhoImagem.equals(imagemDefault)) {
+            try {
+                imagem = ImageIO.read(file);
+                btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 260, 100)));
+            } catch (IOException ex) {
+                Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, "Imagem não encontrada!", ex);
+            }
+        } else {
+            try {
+                imagem = ImageIO.read(file);
+                btnImagem.setIcon(new ImageIcon(imagem));
+            } catch (IOException ex) {
+                Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, "Imagem não encontrada!", ex);
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnImagem;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cadFilmeCmb;
+    private javax.swing.JComboBox<String> cmbClassificacao;
+    private javax.swing.JComboBox<String> cmbSelecionarFilme;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -361,9 +493,11 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtDiretor;
     private javax.swing.JTextField txtDuracao;

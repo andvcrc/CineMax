@@ -229,16 +229,16 @@
               <Font name="Arial" size="18" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="7">
-                <StringItem index="0" value="Selecione"/>
-                <StringItem index="1" value="Livre"/>
-                <StringItem index="2" value="10 Anos"/>
-                <StringItem index="3" value="12 Anos"/>
-                <StringItem index="4" value="14 Anos"/>
-                <StringItem index="5" value="16 Anos"/>
-                <StringItem index="6" value="18 Anos"/>
+              <StringArray count="6">
+                <StringItem index="0" value="Livre"/>
+                <StringItem index="1" value="10 Anos"/>
+                <StringItem index="2" value="12 Anos"/>
+                <StringItem index="3" value="14 Anos"/>
+                <StringItem index="4" value="16 Anos"/>
+                <StringItem index="5" value="18 Anos"/>
               </StringArray>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Selecione"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
