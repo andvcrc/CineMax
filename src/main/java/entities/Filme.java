@@ -4,8 +4,6 @@
  */
 package entities;
 
-import java.nio.file.Path;
-
 /**
  *
  * @author Andre
@@ -16,7 +14,7 @@ public class Filme {
     private String genero;
     private String sinopse;
     private String diretor;
-    private String clasIndicativa;
+    private int posClasIndicativa;
     private int ano;
     private int duracao;
     private String caminhoImagem;
@@ -24,24 +22,24 @@ public class Filme {
     public Filme() {
     }
 
-    public Filme(int codFilme, String titulo, String genero, String sinopse, String diretor, String clasIndicativa, int ano, int duracao, String caminhoImagem) {
+    public Filme(int codFilme, String titulo, String genero, String sinopse, String diretor, int posClasIndicativa, int ano, int duracao, String caminhoImagem) {
         this.codFilme = codFilme;
         this.titulo = titulo;
         this.genero = genero;
         this.sinopse = sinopse;
         this.diretor = diretor;
-        this.clasIndicativa = clasIndicativa;
+        this.posClasIndicativa = posClasIndicativa;
         this.ano = ano;
         this.duracao = duracao;
         this.caminhoImagem = caminhoImagem;
     }
 
-    public Filme(String titulo, String genero, String sinopse, String diretor, String clasIndicativa, int ano, int duracao, String caminhoImagem) {
+    public Filme(String titulo, String genero, String sinopse, String diretor, int posClasIndicativa, int ano, int duracao, String caminhoImagem) {
         this.titulo = titulo;
         this.genero = genero;
         this.sinopse = sinopse;
         this.diretor = diretor;
-        this.clasIndicativa = clasIndicativa;
+        this.posClasIndicativa = posClasIndicativa;
         this.ano = ano;
         this.duracao = duracao;
         this.caminhoImagem = caminhoImagem;
@@ -87,12 +85,12 @@ public class Filme {
         this.diretor = diretor;
     }
 
-    public String getClasIndicativa() {
-        return clasIndicativa;
+    public int getPosClasIndicativa() {
+        return posClasIndicativa;
     }
 
-    public void setClasIndicativa(String clasIndicativa) {
-        this.clasIndicativa = clasIndicativa;
+    public void setPosClasIndicativa(int posClasIndicativa) {
+        this.posClasIndicativa = posClasIndicativa;
     }
 
     public int getAno() {
@@ -110,14 +108,13 @@ public class Filme {
     public void setDuracao(int duracao) {
         this.duracao = duracao;
     }
-    
-    public String getCaminho() {
+
+    public String getCaminhoImagem() {
         return caminhoImagem;
     }
 
-    public void setCaminho(String caminho) {
-        this.caminhoImagem = caminho;
+    public void setCaminhoImagem(String caminhoImagem) {
+        this.caminhoImagem = caminhoImagem;
     }
-    
     
 }

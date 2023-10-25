@@ -5,8 +5,6 @@
 package screens;
 
 import entities.Filme;
-import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +13,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import managers.GerenciaFilme;
 
 /**
@@ -31,6 +28,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     public ConsultaFilmes(GerenciaFilme gerFilme) {
         this.gerFilme = gerFilme;
         initComponents();
+        estadoInicial();
        // Dimension dimensao = lblCartaz.getSize();
         //lblCartaz.setMaximumSize(dimensao);
     }
@@ -61,11 +59,10 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         txtAno = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        cadFilmeSinopse = new javax.swing.JTextArea();
-        btnConfirmar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        txtSinopse = new javax.swing.JTextArea();
+        btnSalvar = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
-        btnConfirmar2 = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         btnImagem = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -73,9 +70,9 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         setForeground(java.awt.Color.white);
         setIconifiable(true);
         setTitle("Cadastro de Filmes");
-        setMaximumSize(new java.awt.Dimension(636, 600));
-        setMinimumSize(new java.awt.Dimension(636, 600));
-        setPreferredSize(new java.awt.Dimension(636, 600));
+        setMaximumSize(new java.awt.Dimension(650, 600));
+        setMinimumSize(new java.awt.Dimension(650, 600));
+        setPreferredSize(new java.awt.Dimension(650, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -123,21 +120,16 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel8.setText("Sinopse:");
 
-        cadFilmeSinopse.setColumns(20);
-        cadFilmeSinopse.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cadFilmeSinopse.setRows(5);
-        cadFilmeSinopse.setEnabled(false);
-        jScrollPane1.setViewportView(cadFilmeSinopse);
+        txtSinopse.setColumns(20);
+        txtSinopse.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtSinopse.setRows(5);
+        txtSinopse.setEnabled(false);
+        jScrollPane1.setViewportView(txtSinopse);
 
-        btnConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirme.png"))); // NOI18N
-        btnConfirmar.setText("Salvar");
-        btnConfirmar.setEnabled(false);
-
-        btnCancelar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
-        btnCancelar.setText("Excluir");
-        btnCancelar.setEnabled(false);
+        btnSalvar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirme.png"))); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.setEnabled(false);
 
         btnConsultar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
@@ -148,10 +140,10 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
             }
         });
 
-        btnConfirmar2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnConfirmar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editar.png"))); // NOI18N
-        btnConfirmar2.setText("Editar");
-        btnConfirmar2.setEnabled(false);
+        btnExcluir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
 
         btnImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cartaz.png"))); // NOI18N
         btnImagem.addActionListener(new java.awt.event.ActionListener() {
@@ -206,15 +198,13 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(txtDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(btnConsultar)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnConfirmar2)
+                                    .addGap(82, 82, 82)
+                                    .addComponent(btnExcluir)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnCancelar)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnConfirmar))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -224,7 +214,6 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -259,18 +248,19 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConfirmar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnConfirmar2)
-                    .addComponent(btnConsultar))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnConsultar)
+                    .addComponent(btnSalvar))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +290,6 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnImagemActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
         int codigo = 0;
         Filme filme = gerFilme.consultar(codigo);
         txtAno.setText(String.valueOf(filme.getAno()));
@@ -308,26 +297,62 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         txtDiretor.setText(filme.getDiretor());
         txtDuracao.setText(String.valueOf(filme.getDuracao()));
         txtGenero.setText(filme.getGenero());
+        txtSinopse.setText(filme.getSinopse());
+        cadFilmeCmb.setSelectedIndex(filme.getPosClasIndicativa());
         BufferedImage imagem;
-        File file = new File(filme.getCaminho()); 
+        File file = new File(filme.getCaminhoImagem()); 
             try {
                 imagem = ImageIO.read(file);
                 btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 260, 100)));
             } catch (IOException ex) {
                 Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
+        estadoAposPesquisa();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
+    public void limparCampos() {
+        txtAno.setText("");
+        txtDiretor.setText("");
+        txtDuracao.setText("");
+        txtGenero.setText("");
+        txtSinopse.setText("");
+        txtTitulo.setText("");
+        cadFilmeCmb.setSelectedIndex(0);
+    }
+    
+    public void estadoInicial() {
+        limparCampos();
+        txtAno.setEnabled(false);
+        txtDiretor.setEnabled(false);
+        txtDuracao.setEnabled(false);
+        txtGenero.setEnabled(false);
+        txtSinopse.setEnabled(false);
+        txtTitulo.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        cadFilmeCmb.setEnabled(false);
+        btnSalvar.setEnabled(false);
+        btnImagem.setEnabled(false);
+    }
+    
+    public void estadoAposPesquisa() {
+        cadFilmeCmb.setEnabled(true);
+        txtAno.setEnabled(true);
+        txtDiretor.setEnabled(true);
+        txtDuracao.setEnabled(true);
+        txtGenero.setEnabled(true);
+        txtSinopse.setEnabled(true);
+        txtTitulo.setEnabled(true);
+        btnExcluir.setEnabled(true);
+        btnSalvar.setEnabled(true);
+        btnImagem.setEnabled(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnConfirmar2;
     private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnImagem;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cadFilmeCmb;
-    private javax.swing.JTextArea cadFilmeSinopse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -343,6 +368,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDiretor;
     private javax.swing.JTextField txtDuracao;
     private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextArea txtSinopse;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

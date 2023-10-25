@@ -55,7 +55,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtSinopse = new javax.swing.JTextArea();
         btnConfirmar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         btnSelecionar = new javax.swing.JButton();
 
@@ -122,9 +122,14 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
-        btnCancelar.setText("Cancelar");
+        btnLimpar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/limpar.png"))); // NOI18N
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel9.setText("Título:");
@@ -152,7 +157,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCancelar)
+                                .addComponent(btnLimpar)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnConfirmar))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,7 +239,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnLimpar))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -263,15 +268,31 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here
-        Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedItem().toString(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), cartaz.getPath());
+        Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), cartaz.getPath());
         gerFilme.adicionar(filme);
         JOptionPane.showMessageDialog(this, cartaz.getPath());
+        limparCampos();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        limparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    public void limparCampos() {
+        txtAno.setText("");
+        txtDiretor.setText("");
+        txtDuracao.setText("");
+        txtGenero.setText("");
+        txtSinopse.setText("");
+        txtTitulo.setText("");
+        btnSelecionar.setText("Selecionar");
+        cmbClassificacao.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSelecionar;
     private javax.swing.JComboBox<String> cmbClassificacao;
     private javax.swing.JLabel jLabel1;
