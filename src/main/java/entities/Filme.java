@@ -9,7 +9,6 @@ package entities;
  * @author Andre
  */
 public class Filme {
-    private int codFilme;
     private String titulo;
     private String genero;
     private String sinopse;
@@ -22,18 +21,6 @@ public class Filme {
     public Filme() {
     }
 
-    public Filme(int codFilme, String titulo, String genero, String sinopse, String diretor, int posClasIndicativa, int ano, int duracao, String caminhoImagem) {
-        this.codFilme = codFilme;
-        this.titulo = titulo;
-        this.genero = genero;
-        this.sinopse = sinopse;
-        this.diretor = diretor;
-        this.posClasIndicativa = posClasIndicativa;
-        this.ano = ano;
-        this.duracao = duracao;
-        this.caminhoImagem = caminhoImagem;
-    }
-
     public Filme(String titulo, String genero, String sinopse, String diretor, int posClasIndicativa, int ano, int duracao, String caminhoImagem) {
         this.titulo = titulo;
         this.genero = genero;
@@ -43,14 +30,6 @@ public class Filme {
         this.ano = ano;
         this.duracao = duracao;
         this.caminhoImagem = caminhoImagem;
-    }
-
-    public int getCodFilme() {
-        return codFilme;
-    }
-
-    public void setCodFilme(int codFilme) {
-        this.codFilme = codFilme;
     }
 
     public String getTitulo() {

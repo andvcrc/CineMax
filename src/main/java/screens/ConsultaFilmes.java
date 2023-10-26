@@ -8,6 +8,7 @@ import entities.Filme;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
      */
     GerenciaFilme gerFilme;
     String imagemDefault = "src/main/resources/images/cartaz.png";
+    JFileChooser navegador = new JFileChooser();
 
     public ConsultaFilmes(GerenciaFilme gerFilme) {
         this.gerFilme = gerFilme;
@@ -135,6 +137,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
 
         txtSinopse.setColumns(20);
         txtSinopse.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtSinopse.setLineWrap(true);
         txtSinopse.setRows(5);
         txtSinopse.setEnabled(false);
         jScrollPane1.setViewportView(txtSinopse);
@@ -185,7 +188,6 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         jLabel9.setText("Cartaz:");
 
         cmbSelecionarFilme.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        cmbSelecionarFilme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
 
         btnEditar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editar.png"))); // NOI18N
@@ -336,7 +338,6 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
 
     private void btnImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagemActionPerformed
         // TODO add your handling code here:
-        JFileChooser navegador = new JFileChooser();
         navegador.setDialogTitle("Escolha a nova imagem para o cartaz:");
 
         FileFilter[] removeFiltroDefault = navegador.getChoosableFileFilters();
@@ -359,22 +360,15 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnImagemActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        int codigo = 0;
-        Filme filme = gerFilme.consultar(codigo);
-        txtAno.setText(String.valueOf(filme.getAno()));
-        txtTitulo.setText(filme.getTitulo());
-        txtDiretor.setText(filme.getDiretor());
-        txtDuracao.setText(String.valueOf(filme.getDuracao()));
-        txtGenero.setText(filme.getGenero());
-        txtSinopse.setText(filme.getSinopse());
-        cmbClassificacao.setSelectedIndex(filme.getPosClasIndicativa());
-        carregaImagem(filme.getCaminhoImagem());
+        preencheCampos();
         estadoPesquisa();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-
+        Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
+        
+        gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
         estadoPosEditarSalvar();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -454,6 +448,18 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnExcluir.setEnabled(true);
         btnSalvar.setEnabled(true);
         btnImagem.setEnabled(true);
+    }
+    
+    public void preencheCampos() {
+        Filme filme = gerFilme.consultar(cmbSelecionarFilme.getSelectedIndex());
+        txtAno.setText(String.valueOf(filme.getAno()));
+        txtTitulo.setText(filme.getTitulo());
+        txtDiretor.setText(filme.getDiretor());
+        txtDuracao.setText(String.valueOf(filme.getDuracao()));
+        txtGenero.setText(filme.getGenero());
+        txtSinopse.setText(filme.getSinopse());
+        cmbClassificacao.setSelectedIndex(filme.getPosClasIndicativa());
+        carregaImagem(filme.getCaminhoImagem());
     }
 
     public void carregaImagem(String caminhoImagem) {

@@ -5,6 +5,14 @@
 package screens;
 
 import java.awt.Component;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import managers.GerenciaFilme;
 
@@ -16,9 +24,11 @@ public class MainScreen extends javax.swing.JFrame {
 
     GerenciaFilme gerFilmes = new GerenciaFilme();
     CadastroFilmes cadFilmes = new CadastroFilmes(gerFilmes);
+    String imagemDefault = "src/main/resources/images/logo-icon.png";
 
     public MainScreen() {
         initComponents();
+        setIcon();
         setExtendedState(MAXIMIZED_BOTH);
     }
 
@@ -320,10 +330,14 @@ public class MainScreen extends javax.swing.JFrame {
         });
     }
 
-    public void centralizaJif(Component jif) {
+    private void centralizaJif(Component jif) {
         telaDesktop.add(jif);
         jif.setLocation((telaDesktop.getWidth() - jif.getWidth()) / 2, (telaDesktop.getHeight() - jif.getHeight()) / 2);
         jif.setVisible(true);
+    }
+    
+    private void setIcon() {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(imagemDefault));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
