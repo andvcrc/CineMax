@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import managers.GerenciaFilme;
@@ -31,6 +32,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     GerenciaFilme gerFilme;
     String imagemDefault = "src/main/resources/images/cartaz.png";
     JFileChooser navegador = new JFileChooser();
+    int retornoFileChooser;
 
     public ConsultaFilmes(GerenciaFilme gerFilme) {
         this.gerFilme = gerFilme;
@@ -345,9 +347,9 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         navegador.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
         navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-        int retorno = navegador.showOpenDialog(this);
+        retornoFileChooser = navegador.showOpenDialog(this);
 
-        if (retorno == JFileChooser.APPROVE_OPTION) {
+        if (estadoDoSelecionadorDeArquivos()) {
             BufferedImage imagem;
             File file = navegador.getSelectedFile();
             try {
@@ -366,10 +368,20 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
-        
-        gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
-        estadoPosEditarSalvar();
+
+        if (estadoDoSelecionadorDeArquivos()) {
+
+            Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
+
+            gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
+            estadoPosEditarSalvar();
+
+            JOptionPane.showMessageDialog(this, "Editado com sucesso!");
+            
+            estadoPosEditarSalvar();
+        }
+
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -416,7 +428,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnEditar.setEnabled(false);
         carregaImagem(imagemDefault);
     }
-    
+
     public void estadoPosEditarSalvar() {
         txtAno.setEnabled(false);
         txtDiretor.setEnabled(false);
@@ -431,7 +443,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnImagem.setEnabled(false);
         btnEditar.setEnabled(true);
     }
-    
+
     public void estadoPesquisa() {
         btnEditar.setEnabled(true);
     }
@@ -449,7 +461,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnSalvar.setEnabled(true);
         btnImagem.setEnabled(true);
     }
-    
+
     public void preencheCampos() {
         Filme filme = gerFilme.consultar(cmbSelecionarFilme.getSelectedIndex());
         txtAno.setText(String.valueOf(filme.getAno()));
@@ -460,6 +472,21 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         txtSinopse.setText(filme.getSinopse());
         cmbClassificacao.setSelectedIndex(filme.getPosClasIndicativa());
         carregaImagem(filme.getCaminhoImagem());
+    }
+
+    public boolean estadoDoSelecionadorDeArquivos() {
+
+        if (retornoFileChooser == JFileChooser.APPROVE_OPTION) {
+            return true;
+        } else if (retornoFileChooser == JFileChooser.CANCEL_OPTION) {
+            JOptionPane.showMessageDialog(this, "Selecione um arquivo antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (retornoFileChooser == JFileChooser.ERROR_OPTION) {
+            JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        return false;
     }
 
     public void carregaImagem(String caminhoImagem) {

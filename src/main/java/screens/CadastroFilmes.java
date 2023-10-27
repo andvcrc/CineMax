@@ -20,6 +20,8 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
 
     private GerenciaFilme gerFilme;
     File cartaz;
+    int retornoFileChooser;
+
     /**
      * Creates new form CadastroFilmes
      */
@@ -264,24 +266,27 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         navegador.removeChoosableFileFilter(removeFiltroDefault[0]);
         navegador.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
         navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        navegador.showOpenDialog(this);
-        cartaz = navegador.getSelectedFile();
-        if(cartaz != null)
-            btnSelecionar.setText(cartaz.getName());
+        retornoFileChooser = navegador.showOpenDialog(this);
+        if (estadoDoSelecionadorDeArquivos()) {
+            btnSelecionar.setText(navegador.getSelectedFile().getName());
+        }
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here
 
-        try {
-            Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), cartaz.getPath());
-            gerFilme.adicionar(filme);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nRevise os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
-            return;
+        if (estadoDoSelecionadorDeArquivos()) {
+            try {
+                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), cartaz.getPath());
+                gerFilme.adicionar(filme);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nRevise os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
+            limparCampos();
         }
-        JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
-        limparCampos();
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -298,6 +303,21 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         txtTitulo.setText("");
         btnSelecionar.setText("Selecionar");
         cmbClassificacao.setSelectedIndex(0);
+    }
+
+    public boolean estadoDoSelecionadorDeArquivos() {
+
+        if (retornoFileChooser == JFileChooser.APPROVE_OPTION) {
+            return true;
+        } else if (retornoFileChooser == JFileChooser.CANCEL_OPTION) {
+            JOptionPane.showMessageDialog(this, "Selecione um arquivo antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (retornoFileChooser == JFileChooser.ERROR_OPTION) {
+            JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
