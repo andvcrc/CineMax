@@ -12,25 +12,25 @@ import java.util.ArrayList;
  * @author IFTM
  */
 public class GerenciaFilme {
-    
+
     private ArrayList<Filme> listaFilme = new ArrayList<Filme>();
 
     public GerenciaFilme() {
     }
-    
+
     public void adicionar(Filme filme) {
         listaFilme.add(filme);
-    
+
     }
-    
+
     public Filme consultar(int posicao) {
         return (listaFilme.get(posicao));
     }
-    
-    public ArrayList<Filme> relatorio () {
+
+    public ArrayList<Filme> relatorio() {
         return listaFilme;
     }
-    
+
     public void editar(Filme filme, int posicao) {
         listaFilme.get(posicao).setTitulo(filme.getTitulo());
         listaFilme.get(posicao).setGenero(filme.getGenero());
@@ -39,7 +39,11 @@ public class GerenciaFilme {
         listaFilme.get(posicao).setPosClasIndicativa(filme.getPosClasIndicativa());
         listaFilme.get(posicao).setAno(filme.getAno());
         listaFilme.get(posicao).setDuracao(filme.getDuracao());
-        listaFilme.get(posicao).setCaminhoImagem(filme.getCaminhoImagem());
+        if (filme.getCaminhoImagem() == null) {
+            return;
+        } else {
+            listaFilme.get(posicao).setCaminhoImagem(filme.getCaminhoImagem());
+        }
     }
-    
+
 }

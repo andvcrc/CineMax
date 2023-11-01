@@ -19,7 +19,7 @@ import managers.GerenciaFilme;
 public class CadastroFilmes extends javax.swing.JInternalFrame {
 
     private GerenciaFilme gerFilme;
-    File cartaz;
+    JFileChooser navegador = new JFileChooser();
     int retornoFileChooser;
 
     /**
@@ -261,7 +261,6 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
-        JFileChooser navegador = new JFileChooser();
         FileFilter[] removeFiltroDefault = navegador.getChoosableFileFilters();
         navegador.removeChoosableFileFilter(removeFiltroDefault[0]);
         navegador.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
@@ -277,7 +276,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
 
         if (estadoDoSelecionadorDeArquivos()) {
             try {
-                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), cartaz.getPath());
+                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
                 gerFilme.adicionar(filme);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nRevise os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);

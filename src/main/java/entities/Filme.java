@@ -31,6 +31,16 @@ public class Filme {
         this.duracao = duracao;
         this.caminhoImagem = caminhoImagem;
     }
+    
+    public Filme(String titulo, String genero, String sinopse, String diretor, int posClasIndicativa, int ano, int duracao) {
+        this.titulo = titulo;
+        this.genero = genero;
+        this.sinopse = sinopse;
+        this.diretor = diretor;
+        this.posClasIndicativa = posClasIndicativa;
+        this.ano = ano;
+        this.duracao = duracao;
+    }
 
     public String getTitulo() {
         return titulo;

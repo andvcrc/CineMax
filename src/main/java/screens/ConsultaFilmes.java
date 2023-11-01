@@ -32,7 +32,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     GerenciaFilme gerFilme;
     String imagemDefault = "src/main/resources/images/cartaz.png";
     JFileChooser navegador = new JFileChooser();
-    int retornoFileChooser;
+    int retornoFileChooser = 0;
 
     public ConsultaFilmes(GerenciaFilme gerFilme) {
         this.gerFilme = gerFilme;
@@ -362,8 +362,8 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnImagemActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        preencheCampos();
         estadoPesquisa();
+        preencheCampos();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -371,14 +371,25 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
 
         if (estadoDoSelecionadorDeArquivos()) {
 
-            Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
+            if (retornoFileChooser == 0) {
+                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()));
 
-            gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
-            estadoPosEditarSalvar();
+                gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
 
-            JOptionPane.showMessageDialog(this, "Editado com sucesso!");
-            
-            estadoPosEditarSalvar();
+                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
+
+                estadoPosEditarSalvar();
+            } else {
+                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
+
+                gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
+                estadoPosEditarSalvar();
+
+                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
+
+                estadoPosEditarSalvar();
+            }
+
         }
 
 
@@ -484,6 +495,8 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         } else if (retornoFileChooser == JFileChooser.ERROR_OPTION) {
             JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
             return false;
+        } else if (retornoFileChooser == 0) {
+            return true;
         }
         JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
         return false;
