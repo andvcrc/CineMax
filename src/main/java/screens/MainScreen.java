@@ -320,7 +320,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void consultaSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaSalasActionPerformed
         // TODO add your handling code here:
         if (gerSalas.relatorio().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhuma sala cadastrada", "Erro!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Nenhuma sala cadastrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
         } else {
             ConsultaSalas conSalas = new ConsultaSalas(gerSalas);
             if (conSalas.isVisible()) {
@@ -339,15 +339,15 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void consultaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaProdutosActionPerformed
         // TODO add your handling code here:
-        if (gerSalas.relatorio().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nenhuma sala cadastrada", "Erro!", JOptionPane.ERROR_MESSAGE);
+        if (gerProdutos.relatorio().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum produto cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
         } else {
-            ConsultaSalas conSalas = new ConsultaSalas(gerSalas);
-            if (conSalas.isVisible()) {
-                conSalas.toFront();
-                conSalas.requestFocus();
+            ConsultaProdutos conProdutos = new ConsultaProdutos(gerProdutos);
+            if (conProdutos.isVisible()) {
+                conProdutos.toFront();
+                conProdutos.requestFocus();
             } else {
-                centralizaJif(conSalas);
+                centralizaJif(conProdutos);
             }
         }
     }//GEN-LAST:event_consultaProdutosActionPerformed

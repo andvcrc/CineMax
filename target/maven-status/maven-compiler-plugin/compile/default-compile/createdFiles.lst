@@ -1,3 +1,4 @@
+screens\ConsultaProdutos$2.class
 screens\ConsultaFilmes$2.class
 screens\Login$1.class
 managers\GerenciaProduto.class
@@ -26,6 +27,7 @@ screens\MainScreen$10.class
 screens\MainScreen$6.class
 screens\MainScreen$3.class
 screens\CadastroProdutos$2.class
+screens\ConsultaProdutos.class
 screens\CadastroFilmes$3.class
 screens\MainScreen$9.class
 entities\Sala.class
@@ -33,13 +35,16 @@ screens\ConsultaSalas$1.class
 screens\CadastroFilmes.class
 screens\MainScreen$2.class
 screens\Login.class
+screens\ConsultaProdutos$3.class
 screens\ConsultaFilmes$3.class
 screens\ConsultaFilmes$6.class
 screens\CadastroFilmes$2.class
 screens\ConsultaSalas.class
+screens\ConsultaProdutos$1.class
 screens\MainScreen$5.class
 screens\MainScreen$1.class
 entities\Filme.class
 screens\MainScreen$8.class
+screens\ConsultaProdutos$4.class
 screens\MainScreen.class
 screens\CadastroProdutos.class
