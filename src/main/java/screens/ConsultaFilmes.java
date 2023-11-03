@@ -32,16 +32,14 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     GerenciaFilme gerFilme;
     String imagemDefault = "src/main/resources/images/cartaz.png";
     JFileChooser navegador = new JFileChooser();
-    int retornoFileChooser = 0;
+    int retornoFileChooser = -2;
 
     public ConsultaFilmes(GerenciaFilme gerFilme) {
         this.gerFilme = gerFilme;
         initComponents();
         estadoInicial();
-        gerFilme.relatorio().forEach(el -> cmbSelecionarFilme.addItem(el.getTitulo()));
-
-        // Dimension dimensao = lblCartaz.getSize();
-        //lblCartaz.setMaximumSize(dimensao);
+        listarFilmes();
+        removeFiltrosDeBusca();
     }
 
     /**
@@ -80,6 +78,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         cmbSelecionarFilme = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JSeparator();
         btnEditar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -201,6 +200,16 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -230,7 +239,8 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel8))
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(btnCancelar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnExcluir)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnEditar)
@@ -320,7 +330,8 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExcluir)
                     .addComponent(btnSalvar)
-                    .addComponent(btnEditar))
+                    .addComponent(btnEditar)
+                    .addComponent(btnCancelar))
                 .addGap(26, 26, 26))
         );
 
@@ -342,11 +353,6 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         navegador.setDialogTitle("Escolha a nova imagem para o cartaz:");
 
-        FileFilter[] removeFiltroDefault = navegador.getChoosableFileFilters();
-        navegador.removeChoosableFileFilter(removeFiltroDefault[0]);
-        navegador.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
-        navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
         retornoFileChooser = navegador.showOpenDialog(this);
 
         if (estadoDoSelecionadorDeArquivos()) {
@@ -363,23 +369,17 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         estadoPesquisa();
-        preencheCampos();
+        if (cmbSelecionarFilme.getItemCount() == 0)
+            return;
+        else
+            preencheCampos();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
 
         if (estadoDoSelecionadorDeArquivos()) {
 
             if (retornoFileChooser == 0) {
-                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()));
-
-                gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
-
-                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
-
-                estadoPosEditarSalvar();
-            } else {
                 Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
 
                 gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
@@ -388,10 +388,18 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Editado com sucesso!");
 
                 estadoPosEditarSalvar();
+            } else {
+                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()));
+
+                gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
+
+                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
+
+                estadoPosEditarSalvar();
+
             }
 
         }
-
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -401,11 +409,33 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
-        estadoInicial();
+
+        Object[] options = {"Sim", "Não"};
+        int confirma = JOptionPane.showOptionDialog(
+                null,
+                "Deseja excluir esse filme da lista?",
+                "Excluir Filme",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        if (confirma == 0) {
+            gerFilme.excluir(cmbSelecionarFilme.getSelectedIndex());
+            listarFilmes();
+            estadoInicial();
+        } else {
+            JOptionPane.showMessageDialog(this, "Exclusão cancelada!");
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    public boolean confereLista(ArrayList<Filme> listaFilmes) {
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        estadoPosEditarSalvar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private boolean confereLista(ArrayList<Filme> listaFilmes) {
         if (listaFilmes.isEmpty()) {
             return false;
         } else {
@@ -413,7 +443,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         }
     }
 
-    public void limparCampos() {
+    private void limparCampos() {
         txtAno.setText("");
         txtDiretor.setText("");
         txtDuracao.setText("");
@@ -421,26 +451,17 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         txtSinopse.setText("");
         txtTitulo.setText("");
         cmbClassificacao.setSelectedIndex(0);
-    }
-
-    public void estadoInicial() {
-        limparCampos();
-        txtAno.setEnabled(false);
-        txtDiretor.setEnabled(false);
-        txtDuracao.setEnabled(false);
-        txtGenero.setEnabled(false);
-        txtSinopse.setEnabled(false);
-        txtTitulo.setEnabled(false);
-        btnExcluir.setEnabled(false);
-        cmbClassificacao.setEnabled(false);
-        cmbClassificacao.setSelectedIndex(0);
-        btnSalvar.setEnabled(false);
-        btnImagem.setEnabled(false);
-        btnEditar.setEnabled(false);
         carregaImagem(imagemDefault);
     }
 
-    public void estadoPosEditarSalvar() {
+    private void estadoInicial() {
+        limparCampos();
+        estadoPosEditarSalvar();
+        cmbClassificacao.setSelectedIndex(0);
+        carregaImagem(imagemDefault);
+    }
+
+    private void estadoPosEditarSalvar() {
         txtAno.setEnabled(false);
         txtDiretor.setEnabled(false);
         txtDuracao.setEnabled(false);
@@ -453,13 +474,17 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnSalvar.setEnabled(false);
         btnImagem.setEnabled(false);
         btnEditar.setEnabled(true);
+        btnCancelar.setEnabled(false);
+        navegador = new JFileChooser();
+        retornoFileChooser = -2;
+        removeFiltrosDeBusca();
     }
 
-    public void estadoPesquisa() {
+    private void estadoPesquisa() {
         btnEditar.setEnabled(true);
     }
 
-    public void estadoEditar() {
+    private void estadoEditar() {
         btnEditar.setEnabled(false);
         cmbClassificacao.setEnabled(true);
         txtAno.setEnabled(true);
@@ -471,9 +496,10 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         btnExcluir.setEnabled(true);
         btnSalvar.setEnabled(true);
         btnImagem.setEnabled(true);
+        btnCancelar.setEnabled(true);
     }
 
-    public void preencheCampos() {
+    private void preencheCampos() {
         Filme filme = gerFilme.consultar(cmbSelecionarFilme.getSelectedIndex());
         txtAno.setText(String.valueOf(filme.getAno()));
         txtTitulo.setText(filme.getTitulo());
@@ -485,24 +511,39 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         carregaImagem(filme.getCaminhoImagem());
     }
 
-    public boolean estadoDoSelecionadorDeArquivos() {
-
-        if (retornoFileChooser == JFileChooser.APPROVE_OPTION) {
-            return true;
-        } else if (retornoFileChooser == JFileChooser.CANCEL_OPTION) {
-            JOptionPane.showMessageDialog(this, "Selecione um arquivo antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
-            return false;
-        } else if (retornoFileChooser == JFileChooser.ERROR_OPTION) {
-            JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
-            return false;
-        } else if (retornoFileChooser == 0) {
-            return true;
-        }
-        JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
-        return false;
+    private void removeFiltrosDeBusca() {
+        FileFilter[] removeFiltroDefault = navegador.getChoosableFileFilters();
+        navegador.removeChoosableFileFilter(removeFiltroDefault[0]);
+        navegador.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+        navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
     }
 
-    public void carregaImagem(String caminhoImagem) {
+    private boolean estadoDoSelecionadorDeArquivos() {
+
+        switch (retornoFileChooser) {
+            case JFileChooser.APPROVE_OPTION:
+                return true;
+            case JFileChooser.CANCEL_OPTION:
+                JOptionPane.showMessageDialog(this, "Selecione um arquivo antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                return false;
+            case JFileChooser.ERROR_OPTION:
+                JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                return false;
+            case -2:
+                return true;
+            default:
+                JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                return false;
+        }
+
+    }
+
+    private void listarFilmes() {
+        cmbSelecionarFilme.removeAllItems();
+        gerFilme.relatorio().forEach(el -> cmbSelecionarFilme.addItem(el.getTitulo()));
+    }
+
+    private void carregaImagem(String caminhoImagem) {
         BufferedImage imagem;
         File file = new File(caminhoImagem);
         if (!caminhoImagem.equals(imagemDefault)) {
@@ -523,6 +564,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;

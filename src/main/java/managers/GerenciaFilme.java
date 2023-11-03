@@ -45,5 +45,9 @@ public class GerenciaFilme {
             listaFilme.get(posicao).setCaminhoImagem(filme.getCaminhoImagem());
         }
     }
+    
+    public void excluir(int pos) {
+        listaFilme.remove(pos);
+    }
 
 }

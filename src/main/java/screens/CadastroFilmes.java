@@ -21,15 +21,16 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
     private GerenciaFilme gerFilme;
     JFileChooser navegador = new JFileChooser();
     int retornoFileChooser;
-
     /**
      * Creates new form CadastroFilmes
      */
     public CadastroFilmes(GerenciaFilme gerFilme) {
         this.gerFilme = gerFilme;
         initComponents();
+        removeFiltrosDeBusca();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -261,10 +262,6 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
-        FileFilter[] removeFiltroDefault = navegador.getChoosableFileFilters();
-        navegador.removeChoosableFileFilter(removeFiltroDefault[0]);
-        navegador.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
-        navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
         retornoFileChooser = navegador.showOpenDialog(this);
         if (estadoDoSelecionadorDeArquivos()) {
             btnSelecionar.setText(navegador.getSelectedFile().getName());
@@ -293,7 +290,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
-    public void limparCampos() {
+    private void limparCampos() {
         txtAno.setText("");
         txtDiretor.setText("");
         txtDuracao.setText("");
@@ -304,7 +301,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         cmbClassificacao.setSelectedIndex(0);
     }
 
-    public boolean estadoDoSelecionadorDeArquivos() {
+    private boolean estadoDoSelecionadorDeArquivos() {
 
         if (retornoFileChooser == JFileChooser.APPROVE_OPTION) {
             return true;
@@ -317,6 +314,13 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         }
         JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
         return false;
+    }
+    
+    private void removeFiltrosDeBusca() {
+        FileFilter[] removeFiltroDefault = navegador.getChoosableFileFilters();
+        navegador.removeChoosableFileFilter(removeFiltroDefault[0]);
+        navegador.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+        navegador.setFileSelectionMode(JFileChooser.FILES_ONLY);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

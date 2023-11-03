@@ -20,6 +20,7 @@ screens\CadastroFilmes.class
 screens\MainScreen$2.class
 screens\Login.class
 screens\ConsultaFilmes$3.class
+screens\ConsultaFilmes$6.class
 screens\CadastroFilmes$2.class
 screens\MainScreen$5.class
 screens\MainScreen$1.class
