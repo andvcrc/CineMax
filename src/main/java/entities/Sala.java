@@ -10,32 +10,11 @@ package entities;
  */
 public class Sala {
     private int numSala;
-    private String status;
-    private int[] poltronas;
+    private int status;
 
-    public Sala() {
-    }
-
-    public Sala(int numSala, String status, int numPoltronas, int[] poltronas) {
+    public Sala(int numSala, int status) {
         this.numSala = numSala;
         this.status = status;
-        this.poltronas = new int[numPoltronas];
-        for(int i=0; i < poltronas.length; i++){
-            this.poltronas[i] = poltronas[i];
-        }
-    }
-
-    public Sala(int numSala, String status) {
-        this.numSala = numSala;
-        this.status = status;
-    }
-
-    public int[] getPoltronas() {
-        return poltronas;
-    }
-
-    public void setPoltronas(int[] poltronas) {
-        this.poltronas = poltronas;
     }
     
     public int getNumSala() {
@@ -46,11 +25,11 @@ public class Sala {
         this.numSala = numSala;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     

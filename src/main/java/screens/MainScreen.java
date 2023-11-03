@@ -4,17 +4,14 @@
  */
 package screens;
 
+import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 import java.awt.Component;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import managers.GerenciaFilme;
+import managers.GerenciaProduto;
+import managers.GerenciaSala;
 
 /**
  *
@@ -24,6 +21,12 @@ public class MainScreen extends javax.swing.JFrame {
 
     GerenciaFilme gerFilmes = new GerenciaFilme();
     CadastroFilmes cadFilmes = new CadastroFilmes(gerFilmes);
+    GerenciaSala gerSalas = new GerenciaSala();
+    CadastroSalas cadSalas = new CadastroSalas(gerSalas);
+    GerenciaProduto gerProdutos = new GerenciaProduto();
+    CadastroProdutos cadProdutos = new CadastroProdutos(gerProdutos);
+    
+    
     String imagemDefault = "src/main/resources/images/logo-icon.png";
 
     public MainScreen() {
@@ -140,10 +143,20 @@ public class MainScreen extends javax.swing.JFrame {
 
         cadastroSalas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
         cadastroSalas.setText("Cadastrar");
+        cadastroSalas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroSalasActionPerformed(evt);
+            }
+        });
         jMenu5.add(cadastroSalas);
 
         consultaSalas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
         consultaSalas.setText("Consultar");
+        consultaSalas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaSalasActionPerformed(evt);
+            }
+        });
         jMenu5.add(consultaSalas);
 
         jMenu1.add(jMenu5);
@@ -153,10 +166,20 @@ public class MainScreen extends javax.swing.JFrame {
 
         cadastroProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
         cadastroProdutos.setText("Cadastrar");
+        cadastroProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroProdutosActionPerformed(evt);
+            }
+        });
         jMenu7.add(cadastroProdutos);
 
         consultaProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
         consultaProdutos.setText("Consultar");
+        consultaProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaProdutosActionPerformed(evt);
+            }
+        });
         jMenu7.add(consultaProdutos);
 
         jMenu1.add(jMenu7);
@@ -267,12 +290,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void cadastroFilmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroFilmesActionPerformed
-        if (cadFilmes.isVisible()) {
-            cadFilmes.toFront();
-            cadFilmes.requestFocus();
-        } else {
-            centralizaJif(cadFilmes);
-        }
+        telaCadastro(cadFilmes);
     }//GEN-LAST:event_cadastroFilmesActionPerformed
 
     private void consultaFilmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaFilmesActionPerformed
@@ -294,6 +312,45 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void cadastroSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroSalasActionPerformed
+        telaCadastro(cadSalas);
+    }//GEN-LAST:event_cadastroSalasActionPerformed
+
+    private void consultaSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaSalasActionPerformed
+        // TODO add your handling code here:
+        if (gerSalas.relatorio().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhuma sala cadastrada", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            ConsultaSalas conSalas = new ConsultaSalas(gerSalas);
+            if (conSalas.isVisible()) {
+                conSalas.toFront();
+                conSalas.requestFocus();
+            } else {
+                centralizaJif(conSalas);
+            }
+        }
+    }//GEN-LAST:event_consultaSalasActionPerformed
+
+    private void cadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroProdutosActionPerformed
+        // TODO add your handling code here:
+        telaCadastro(cadProdutos);
+    }//GEN-LAST:event_cadastroProdutosActionPerformed
+
+    private void consultaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaProdutosActionPerformed
+        // TODO add your handling code here:
+        if (gerSalas.relatorio().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhuma sala cadastrada", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            ConsultaSalas conSalas = new ConsultaSalas(gerSalas);
+            if (conSalas.isVisible()) {
+                conSalas.toFront();
+                conSalas.requestFocus();
+            } else {
+                centralizaJif(conSalas);
+            }
+        }
+    }//GEN-LAST:event_consultaProdutosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,6 +395,15 @@ public class MainScreen extends javax.swing.JFrame {
     
     private void setIcon() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(imagemDefault));
+    }
+    
+    private void telaCadastro(JInternalFrame frame) {
+        if (frame.isVisible()) {
+            frame.toFront();
+            frame.requestFocus();
+        } else {
+            centralizaJif(frame);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

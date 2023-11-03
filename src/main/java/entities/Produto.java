@@ -11,10 +11,25 @@ package entities;
 public class Produto {
     private String nome;
     private float preco;
+    private String caminhoImagem;
 
     public Produto(String nome, float preco) {
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public Produto(String nome, float preco, String caminhoImagem) {
+        this.nome = nome;
+        this.preco = preco;
+        this.caminhoImagem = caminhoImagem;
+    }
+
+    public String getCaminhoImagem() {
+        return caminhoImagem;
+    }
+
+    public void setCaminhoImagem(String caminhoImagem) {
+        this.caminhoImagem = caminhoImagem;
     }
 
     public String getNome() {
