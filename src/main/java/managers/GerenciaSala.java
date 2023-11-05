@@ -38,11 +38,15 @@ public class GerenciaSala {
         return listaSalas;
     }
 
-    public Sala consulta(int index) {
+    public Sala consultar(int index) {
         return listaSalas.get(index);
     }
     
     public void editar(Sala sala, int index) {
         listaSalas.get(index).setStatus(sala.getStatus());
+    }
+    
+    public int index(Sala sala) {
+        return listaSalas.indexOf(sala);
     }
 }

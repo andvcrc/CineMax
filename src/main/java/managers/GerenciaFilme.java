@@ -49,5 +49,9 @@ public class GerenciaFilme {
     public void excluir(int pos) {
         listaFilme.remove(pos);
     }
+    
+    public int index(Filme filme) {
+        return listaFilme.indexOf(filme);
+    }
 
 }

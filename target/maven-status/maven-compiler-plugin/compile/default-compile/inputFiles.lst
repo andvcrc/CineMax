@@ -1,11 +1,14 @@
 C:\Users\Andre\Desktop\CineMax\src\main\java\managers\GerenciaProduto.java
+C:\Users\Andre\Desktop\CineMax\src\main\java\screens\ConsultaSessao.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\screens\ConsultaFilmes.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\entities\Sessao.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\screens\CadastroFilmes.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\entities\Pessoa.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\screens\ConsultaSalas.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\screens\MainScreen.java
+C:\Users\Andre\Desktop\CineMax\src\main\java\screens\CadastroSessao.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\managers\GerenciaSala.java
+C:\Users\Andre\Desktop\CineMax\src\main\java\managers\GerenciaSessao.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\entities\Ingresso.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\entities\Produto.java
 C:\Users\Andre\Desktop\CineMax\src\main\java\entities\Sala.java

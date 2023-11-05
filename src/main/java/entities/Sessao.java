@@ -9,33 +9,27 @@ package entities;
  * @author Andre
  */
 public class Sessao {
-    private int codSessao;
     private Filme filme;
     private Sala sala;
-    private String hora;
+    private Object dataHora;
+    private int[] poltronas = new int[50];
 
-    public Sessao(int codSessao, Filme filme, Sala sala, String hora) {
-        this.codSessao = codSessao;
+    public Sessao(Filme filme, Sala sala, Object dataHora, int[] poltronas) {
         this.filme = filme;
         this.sala = sala;
-        this.hora = hora;
+        this.dataHora = dataHora;
+        for(int i=0; i < poltronas.length; i++){
+            this.poltronas[i] = poltronas[i];
+        }
     }
 
-    public Sessao(Filme filme, Sala sala, String hora) {
+    public Sessao(Filme filme, Sala sala, Object dataHora) {
         this.filme = filme;
         this.sala = sala;
-        this.hora = hora;
+        this.dataHora = dataHora;
     }
 
     public Sessao() {
-    }
-
-    public int getCodSessao() {
-        return codSessao;
-    }
-
-    public void setCodSessao(int codSessao) {
-        this.codSessao = codSessao;
     }
 
     public Filme getFilme() {
@@ -54,12 +48,12 @@ public class Sessao {
         this.sala = sala;
     }
 
-    public String getHora() {
-        return hora;
+    public Object getDataHora() {
+        return dataHora;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setDataHora(Object hora) {
+        this.dataHora = hora;
     } 
     
 }

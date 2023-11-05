@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import managers.GerenciaFilme;
 import managers.GerenciaProduto;
 import managers.GerenciaSala;
+import managers.GerenciaSessao;
 
 /**
  *
@@ -25,6 +26,7 @@ public class MainScreen extends javax.swing.JFrame {
     CadastroSalas cadSalas = new CadastroSalas(gerSalas);
     GerenciaProduto gerProdutos = new GerenciaProduto();
     CadastroProdutos cadProdutos = new CadastroProdutos(gerProdutos);
+    GerenciaSessao gerSessao = new GerenciaSessao();
     
     
     String imagemDefault = "src/main/resources/images/logo-icon.png";
@@ -189,10 +191,20 @@ public class MainScreen extends javax.swing.JFrame {
 
         cadastroSessao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
         cadastroSessao.setText("Cadastro");
+        cadastroSessao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastroSessaoActionPerformed(evt);
+            }
+        });
         jMenu8.add(cadastroSessao);
 
         consultaSessao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
         consultaSessao.setText("Consultar");
+        consultaSessao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaSessaoActionPerformed(evt);
+            }
+        });
         jMenu8.add(consultaSessao);
 
         jMenu1.add(jMenu8);
@@ -294,7 +306,6 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastroFilmesActionPerformed
 
     private void consultaFilmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaFilmesActionPerformed
-
         if (gerFilmes.relatorio().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nenhum filme cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -333,12 +344,10 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_consultaSalasActionPerformed
 
     private void cadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroProdutosActionPerformed
-        // TODO add your handling code here:
         telaCadastro(cadProdutos);
     }//GEN-LAST:event_cadastroProdutosActionPerformed
 
     private void consultaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaProdutosActionPerformed
-        // TODO add your handling code here:
         if (gerProdutos.relatorio().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nenhum produto cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -351,6 +360,37 @@ public class MainScreen extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_consultaProdutosActionPerformed
+
+    private void cadastroSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroSessaoActionPerformed
+        if (gerFilmes.relatorio().isEmpty() || gerSalas.relatorio().isEmpty()) {
+            if(gerFilmes.relatorio().isEmpty())
+                JOptionPane.showMessageDialog(this, "Nenhum filme cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            if(gerSalas.relatorio().isEmpty())
+                JOptionPane.showMessageDialog(this, "Nenhuma sala cadastrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            CadastroSessao cadSessao = new CadastroSessao(gerFilmes, gerSalas, gerSessao);
+            telaCadastro(cadSessao);
+        }
+    }//GEN-LAST:event_cadastroSessaoActionPerformed
+
+    private void consultaSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaSessaoActionPerformed
+        ConsultaSessao conSessao = new ConsultaSessao(gerFilmes, gerSalas, gerSessao);
+        if (gerSessao.relatorio().isEmpty() || gerFilmes.relatorio().isEmpty() || gerSalas.relatorio().isEmpty()) {
+            if(gerSessao.relatorio().isEmpty())
+               JOptionPane.showMessageDialog(this, "Nenhuma sessão cadastrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            if(gerFilmes.relatorio().isEmpty())
+                JOptionPane.showMessageDialog(this, "Nenhum filme cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            if(gerSalas.relatorio().isEmpty())
+                JOptionPane.showMessageDialog(this, "Nenhuma sala cadastrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (conSessao.isVisible()) {
+                conSessao.toFront();
+                conSessao.requestFocus();
+            } else {
+                centralizaJif(conSessao);
+            }
+        }
+    }//GEN-LAST:event_consultaSessaoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -200,8 +200,8 @@ public class ConsultaSalas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbSelecionarSalaActionPerformed
 
     private void preencheCampos() {
-        spnSala.setValue(Integer.valueOf(gerSala.consulta(cmbSelecionarSala.getSelectedIndex()).getNumSala()));
-        cmbEstado.setSelectedIndex(gerSala.consulta(cmbSelecionarSala.getSelectedIndex()).getStatus());
+        spnSala.setValue(Integer.valueOf(gerSala.consultar(cmbSelecionarSala.getSelectedIndex()).getNumSala()));
+        cmbEstado.setSelectedIndex(gerSala.consultar(cmbSelecionarSala.getSelectedIndex()).getStatus());
     }
     
     private void estadoPosConfirmar() {
