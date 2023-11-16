@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
@@ -69,7 +70,6 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtSinopse = new javax.swing.JTextArea();
         btnSalvar = new javax.swing.JButton();
-        btnConsultar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnImagem = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -152,15 +152,6 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
             }
         });
 
-        btnConsultar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lupa.png"))); // NOI18N
-        btnConsultar.setText("Pesquisar");
-        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarActionPerformed(evt);
-            }
-        });
-
         btnExcluir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
         btnExcluir.setText("Excluir");
@@ -188,6 +179,11 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         jLabel9.setText("Cartaz:");
 
         cmbSelecionarFilme.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbSelecionarFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSelecionarFilmeActionPerformed(evt);
+            }
+        });
 
         btnEditar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editar.png"))); // NOI18N
@@ -227,11 +223,11 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(88, 88, 88)
                                         .addComponent(jLabel10)
                                         .addGap(18, 18, 18)
                                         .addComponent(cmbSelecionarFilme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnConsultar))
+                                        .addGap(76, 76, 76))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel9)
@@ -286,12 +282,11 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConsultar)
                     .addComponent(jLabel10)
                     .addComponent(cmbSelecionarFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -366,40 +361,41 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnImagemActionPerformed
 
-    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        estadoPesquisa();
-        if (cmbSelecionarFilme.getItemCount() == 0)
-            return;
-        else
-            preencheCampos();
-    }//GEN-LAST:event_btnConsultarActionPerformed
-
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (txtTitulo.getText().trim().isEmpty()
+                || txtAno.getText().trim().isEmpty()
+                || txtDiretor.getText().trim().isEmpty()
+                || txtDuracao.getText().trim().isEmpty()
+                || txtGenero.getText().trim().isEmpty()
+                || txtSinopse.getText().trim().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nPreencha todos os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
 
-        if (estadoDoSelecionadorDeArquivos()) {
+        } else {
+            if (estadoDoSelecionadorDeArquivos()) {
+                if (retornoFileChooser == 0) {
+                    Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
 
-            if (retornoFileChooser == 0) {
-                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
+                    gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
+                    estadoPosEditarSalvar();
 
-                gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
-                estadoPosEditarSalvar();
+                    JOptionPane.showMessageDialog(this, "Editado com sucesso!");
 
-                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
+                    estadoPosEditarSalvar();
+                } else {
+                    Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()));
 
-                estadoPosEditarSalvar();
-            } else {
-                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()));
+                    gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
 
-                gerFilme.editar(filme, cmbSelecionarFilme.getSelectedIndex());
+                    JOptionPane.showMessageDialog(this, "Editado com sucesso!");
 
-                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
-
-                estadoPosEditarSalvar();
-
+                    estadoPosEditarSalvar();
+                    
+                    cmbSelecionarFilme.removeAllItems();
+                    gerFilme.relatorio().forEach(el -> cmbSelecionarFilme.addItem(el.getTitulo()));
+                }
             }
-
         }
-
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -433,6 +429,15 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         estadoPosEditarSalvar();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cmbSelecionarFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSelecionarFilmeActionPerformed
+        try {
+            estadoPesquisa();
+            preencheCampos();
+        } catch (Exception e) {
+            return;
+        } 
+    }//GEN-LAST:event_cmbSelecionarFilmeActionPerformed
 
     private boolean confereLista(ArrayList<Filme> listaFilmes) {
         if (listaFilmes.isEmpty()) {
@@ -564,7 +569,6 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnImagem;

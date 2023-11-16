@@ -4,11 +4,11 @@
  */
 package screens;
 
-import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 import java.awt.Component;
 import java.awt.Toolkit;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import managers.GerenciaCarrinhoDeCompras;
 import managers.GerenciaFilme;
 import managers.GerenciaProduto;
 import managers.GerenciaSala;
@@ -27,6 +27,7 @@ public class MainScreen extends javax.swing.JFrame {
     GerenciaProduto gerProdutos = new GerenciaProduto();
     CadastroProdutos cadProdutos = new CadastroProdutos(gerProdutos);
     GerenciaSessao gerSessao = new GerenciaSessao();
+    GerenciaCarrinhoDeCompras gerCarrinho = new GerenciaCarrinhoDeCompras();
     
     
     String imagemDefault = "src/main/resources/images/logo-icon.png";
@@ -69,8 +70,8 @@ public class MainScreen extends javax.swing.JFrame {
         cadastroSessao = new javax.swing.JMenuItem();
         consultaSessao = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        btnVender = new javax.swing.JMenuItem();
+        btnConsultarVenda = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -214,13 +215,23 @@ public class MainScreen extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reservas.png"))); // NOI18N
         jMenu2.setText("Vendas   |");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carrinho.png"))); // NOI18N
-        jMenuItem1.setText("Vender");
-        jMenu2.add(jMenuItem1);
+        btnVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carrinho.png"))); // NOI18N
+        btnVender.setText("Vender");
+        btnVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVenderActionPerformed(evt);
+            }
+        });
+        jMenu2.add(btnVender);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
-        jMenuItem2.setText("Consultar Venda");
-        jMenu2.add(jMenuItem2);
+        btnConsultarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
+        btnConsultarVenda.setText("Consultar Venda");
+        btnConsultarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarVendaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(btnConsultarVenda);
 
         jMenuBar1.add(jMenu2);
 
@@ -392,6 +403,35 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_consultaSessaoActionPerformed
 
+    private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
+        // TODO add your handling code here:
+        if (gerProdutos.relatorio().isEmpty() || gerSessao.relatorio().isEmpty()) {
+            if(gerProdutos.relatorio().isEmpty())
+                JOptionPane.showMessageDialog(this, "Nenhum produto cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            if(gerSessao.relatorio().isEmpty())
+                JOptionPane.showMessageDialog(this, "Nenhuma sessão cadastrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Vender vender = new Vender(gerSessao, gerProdutos, gerCarrinho);
+            telaCadastro(vender);
+        }
+    }//GEN-LAST:event_btnVenderActionPerformed
+
+    private void btnConsultarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarVendaActionPerformed
+        // TODO add your handling code here:
+        ConsultarVenda conVenda = new ConsultarVenda(gerCarrinho);
+        if (gerSessao.relatorio().isEmpty() || gerFilmes.relatorio().isEmpty() || gerSalas.relatorio().isEmpty()) {
+            if(gerCarrinho.relatorio().isEmpty())
+               JOptionPane.showMessageDialog(this, "Nenhuma venda!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (conVenda.isVisible()) {
+                conVenda.toFront();
+                conVenda.requestFocus();
+            } else {
+                centralizaJif(conVenda);
+            }
+        }
+    }//GEN-LAST:event_btnConsultarVendaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -437,7 +477,7 @@ public class MainScreen extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(imagemDefault));
     }
     
-    private void telaCadastro(JInternalFrame frame) {
+    public void telaCadastro(JInternalFrame frame) {
         if (frame.isVisible()) {
             frame.toFront();
             frame.requestFocus();
@@ -447,6 +487,8 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnConsultarVenda;
+    private javax.swing.JMenuItem btnVender;
     private javax.swing.JMenuItem cadastroFilmes;
     private javax.swing.JMenuItem cadastroProdutos;
     private javax.swing.JMenuItem cadastroSalas;
@@ -468,8 +510,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

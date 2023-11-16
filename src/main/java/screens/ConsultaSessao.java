@@ -66,6 +66,8 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         cmbSelecionarSessao = new javax.swing.JComboBox<>();
         spnData = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
+        cmbEstado = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -110,13 +112,17 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
                 cmbFilmeItemStateChanged(evt);
             }
         });
+        cmbFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFilmeActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Filme:");
 
         btnImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cartaz.png"))); // NOI18N
         btnImagem.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnImagem.setEnabled(false);
         btnImagem.setMaximumSize(new java.awt.Dimension(180, 260));
         btnImagem.setMinimumSize(new java.awt.Dimension(180, 260));
         btnImagem.setPreferredSize(new java.awt.Dimension(180, 260));
@@ -125,6 +131,16 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
         jLabel3.setText("Horário:");
 
         cmbSala.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbSala.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbSalaItemStateChanged(evt);
+            }
+        });
+        cmbSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSalaActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("Sala:");
@@ -138,10 +154,22 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
                 cmbSelecionarSessaoItemStateChanged(evt);
             }
         });
+        cmbSelecionarSessao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSelecionarSessaoActionPerformed(evt);
+            }
+        });
 
         spnData.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         spnData.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1699135360296L), null, java.util.Calendar.DAY_OF_MONTH));
         spnData.setEnabled(false);
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel6.setText("Estado da sala:");
+
+        cmbEstado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Em condição de uso", "Sem condição de uso", "Em manutenção" }));
+        cmbEstado.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,7 +183,12 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbSelecionarSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
@@ -167,16 +200,13 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbSala, 0, 200, Short.MAX_VALUE)
+                            .addComponent(cmbSala, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnConfirmar)
-                            .addComponent(spnData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbSelecionarSessao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                            .addComponent(spnData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbEstado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,6 +233,10 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(spnData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -228,14 +262,18 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        try {
-            Sessao sessao = new Sessao(gerFilme.consultar(cmbFilme.getSelectedIndex()), gerSala.consultar(cmbSala.getSelectedIndex()), spnData.getValue());
-            gerSessao.editar(sessao, cmbSelecionarSessao.getSelectedIndex());
-            JOptionPane.showMessageDialog(this, "Sessão alterada!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Não foi possível alterar. Revise os campos e tente novamente!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        if (cmbEstado.getSelectedIndex() == 1 || cmbEstado.getSelectedIndex() == 2) {
+            JOptionPane.showMessageDialog(this, "Não foi possível alterar pois a sala selecionada está indisponível!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Sessao sessao = new Sessao(gerFilme.consultar(cmbFilme.getSelectedIndex()), gerSala.consultar(cmbSala.getSelectedIndex()), spnData.getValue());
+                gerSessao.editar(sessao, cmbSelecionarSessao.getSelectedIndex());
+                JOptionPane.showMessageDialog(this, "Sessão alterada!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Não foi possível alterar. Revise os campos e tente novamente!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            }
+            estadoInicial();
         }
-        estadoInicial();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -245,6 +283,7 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
     private void cmbSelecionarSessaoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSelecionarSessaoItemStateChanged
         inicializaValores();
         preencheValores();
+        estadoInicial();
     }//GEN-LAST:event_cmbSelecionarSessaoItemStateChanged
 
     private void cmbFilmeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFilmeItemStateChanged
@@ -255,6 +294,27 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
             return;
         }
     }//GEN-LAST:event_cmbFilmeItemStateChanged
+
+    private void cmbFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFilmeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbFilmeActionPerformed
+
+    private void cmbSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSalaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSalaActionPerformed
+
+    private void cmbSalaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSalaItemStateChanged
+        try {
+            sala = gerSala.consultar(cmbSala.getSelectedIndex());
+            cmbEstado.setSelectedIndex(sala.getStatus());
+        } catch (Exception e) {
+            return;
+        }
+    }//GEN-LAST:event_cmbSalaItemStateChanged
+
+    private void cmbSelecionarSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSelecionarSessaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSelecionarSessaoActionPerformed
 
     private void carregaImagem(String caminhoImagem) {
         BufferedImage imagem;
@@ -303,7 +363,7 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
     private void listarSessoes() {
         cmbSelecionarSessao.removeAllItems();
         for (int i = 1; i <= gerSessao.relatorio().size(); i++) {
-            cmbSelecionarSessao.addItem("item " + i);
+            cmbSelecionarSessao.addItem(String.valueOf(i));
         }
     }
 
@@ -320,6 +380,7 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnImagem;
+    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbFilme;
     private javax.swing.JComboBox<String> cmbSala;
     private javax.swing.JComboBox<String> cmbSelecionarSessao;
@@ -328,6 +389,7 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

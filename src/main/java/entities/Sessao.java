@@ -4,6 +4,9 @@
  */
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Andre
@@ -12,14 +15,15 @@ public class Sessao {
     private Filme filme;
     private Sala sala;
     private Object dataHora;
-    private int[] poltronas = new int[50];
+    private List<Integer> poltronasReservadas = new ArrayList<Integer>();
+    private ArrayList<Integer> poltronas = new ArrayList<Integer>();
 
-    public Sessao(Filme filme, Sala sala, Object dataHora, int[] poltronas) {
+    public Sessao(Filme filme, Sala sala, Object dataHora, ArrayList<Integer> poltronas) {
         this.filme = filme;
         this.sala = sala;
         this.dataHora = dataHora;
-        for(int i=0; i < poltronas.length; i++){
-            this.poltronas[i] = poltronas[i];
+        for(int i=0; i < 50; i++){
+            this.poltronas.add(poltronas.get(i));
         }
     }
 
@@ -27,6 +31,9 @@ public class Sessao {
         this.filme = filme;
         this.sala = sala;
         this.dataHora = dataHora;
+        for(int i=0; i < 50; i++){
+            poltronas.add(1+i);
+        }
     }
 
     public Sessao() {
@@ -55,5 +62,18 @@ public class Sessao {
     public void setDataHora(Object hora) {
         this.dataHora = hora;
     } 
+
+    public ArrayList<Integer> getPoltronas() {
+        return poltronas;
+    }
+    
+    public void reservaPoltrona(int poltrona) {
+        poltronas.remove(poltrona-1);
+        poltronasReservadas.add(poltrona);
+    }
+
+    public void setPoltronas(ArrayList<Integer> poltronas) {
+        this.poltronas = poltronas;
+    }
     
 }

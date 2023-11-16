@@ -21,6 +21,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
     private GerenciaFilme gerFilme;
     JFileChooser navegador = new JFileChooser();
     int retornoFileChooser;
+
     /**
      * Creates new form CadastroFilmes
      */
@@ -30,7 +31,6 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         removeFiltrosDeBusca();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,8 +187,8 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(txtDiretor))))
+                                    .addGap(14, 14, 14)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel5)
                                         .addComponent(jLabel3))
@@ -201,7 +201,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel6)
                                     .addGap(193, 193, 193)))
                             .addComponent(jScrollPane1))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,18 +243,18 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnLimpar))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
         );
 
         pack();
@@ -269,20 +269,27 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        // TODO add your handling code here
+        if (txtTitulo.getText().trim().isEmpty()
+                || txtAno.getText().trim().isEmpty()
+                || txtDiretor.getText().trim().isEmpty()
+                || txtDuracao.getText().trim().isEmpty()
+                || txtGenero.getText().trim().isEmpty()
+                || txtSinopse.getText().trim().isEmpty()) {
 
-        if (estadoDoSelecionadorDeArquivos()) {
-            try {
-                Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
-                gerFilme.adicionar(filme);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nRevise os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
-                return;
+            JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nPreencha todos os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (estadoDoSelecionadorDeArquivos()) {
+                try {
+                    Filme filme = new Filme(txtTitulo.getText().toString(), txtGenero.getText().toString(), txtSinopse.getText().toString(), txtDiretor.getText().toString(), cmbClassificacao.getSelectedIndex(), Integer.parseInt(txtAno.getText().toString()), Integer.parseInt(txtDuracao.getText().toString()), navegador.getSelectedFile().getPath());
+                    gerFilme.adicionar(filme);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nRevise os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
+                limparCampos();
             }
-            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
-            limparCampos();
         }
-
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -315,7 +322,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Selecione um arquivo válido antes de continuar!", "Erro!", JOptionPane.ERROR_MESSAGE);
         return false;
     }
-    
+
     private void removeFiltrosDeBusca() {
         FileFilter[] removeFiltroDefault = navegador.getChoosableFileFilters();
         navegador.removeChoosableFileFilter(removeFiltroDefault[0]);

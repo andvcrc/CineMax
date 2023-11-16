@@ -10,15 +10,15 @@ package entities;
  */
 public class Produto {
     private String nome;
-    private float preco;
+    private double preco;
     private String caminhoImagem;
 
-    public Produto(String nome, float preco) {
+    public Produto(String nome, double preco) {
         this.nome = nome;
         this.preco = preco;
     }
 
-    public Produto(String nome, float preco, String caminhoImagem) {
+    public Produto(String nome, double preco, String caminhoImagem) {
         this.nome = nome;
         this.preco = preco;
         this.caminhoImagem = caminhoImagem;
@@ -40,11 +40,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public float getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
     

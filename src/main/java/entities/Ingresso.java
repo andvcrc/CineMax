@@ -18,9 +18,7 @@ public class Ingresso {
         this.tipo = tipo;
         this.preco = preco;
     }
-
-    public Ingresso() {
-    }
+    
 
     public Sessao getSessao() {
         return sessao;

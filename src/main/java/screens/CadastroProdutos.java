@@ -198,7 +198,6 @@ public class CadastroProdutos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagemActionPerformed
-        // TODO add your handling code here:
         navegador.setDialogTitle("Imagem do produto:");
 
         retornoFileChooser = navegador.showOpenDialog(this);
@@ -216,29 +215,40 @@ public class CadastroProdutos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnImagemActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (txtNome.getText().trim().isEmpty() || txtPreco.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nPreencha todos os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else if (!isNumeric(txtPreco.getText().toString())) {
+            JOptionPane.showMessageDialog(this, "Número inválido!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Produto produto = new Produto(txtNome.getText(), Integer.parseInt(txtPreco.getText()), navegador.getSelectedFile().getPath());
 
-        try {
-
-            Produto produto = new Produto(txtNome.getText(), Integer.parseInt(txtPreco.getText()), navegador.getSelectedFile().getPath());
-
-            boolean status = gerProduto.adicionar(produto);
-            if (status == false) {
-                JOptionPane.showMessageDialog(this, "Produto já registrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Produto registrado!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } catch (Exception e) {
+                boolean status = gerProduto.adicionar(produto);
+                if (status == false) {
+                    JOptionPane.showMessageDialog(this, "Produto já registrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Produto registrado!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos e tente novamente", "Erro!", JOptionPane.ERROR_MESSAGE);
+            }
+            estadoInicial();
         }
-        estadoInicial();
-
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
     private void limparCampos() {
         txtNome.setText("");
         txtPreco.setText("");

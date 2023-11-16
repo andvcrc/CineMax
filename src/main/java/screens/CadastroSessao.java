@@ -284,7 +284,9 @@ public class CadastroSessao extends javax.swing.JInternalFrame {
         cmbEstado.setSelectedIndex(0);
         cmbFilme.setSelectedIndex(0);
         cmbSala.setSelectedItem(0);
-        //txtHora.setText("");
+        cmbSala.setSelectedIndex(0);
+        cmbFilme.setSelectedIndex(0);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -155,21 +155,25 @@ public class CadastroSalas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-
         Sala sala = new Sala(Integer.parseInt(
                 spnSala.getValue().toString()),
                 cmbEstado.getSelectedIndex());
         boolean status = gerSala.adicionar(sala);
         if (status == false)
             JOptionPane.showMessageDialog(this, "Sala já registrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
-        else
+        else {
             JOptionPane.showMessageDialog(this, "Sala cadastrada!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+            estadoInicial();
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void estadoInicial() {
+        cmbEstado.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

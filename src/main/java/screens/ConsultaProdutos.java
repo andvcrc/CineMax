@@ -246,40 +246,59 @@ public class ConsultaProdutos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnImagemActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (txtNome.getText().trim().isEmpty() || txtPreco.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Não foi possível alterar! \nPreencha todos os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else if (!isNumeric(txtPreco.getText().toString())) {
+            JOptionPane.showMessageDialog(this, "Número inválido!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (estadoDoSelecionadorDeArquivos()) {
+                if (retornoFileChooser == 0) {
+                    Produto produto = new Produto(txtNome.getText(), Double.parseDouble(txtPreco.getText()), navegador.getSelectedFile().getPath());
 
-        if (estadoDoSelecionadorDeArquivos()) {
+                    gerProduto.editar(produto, cmbSelecionarProduto.getSelectedIndex());
 
-            if (retornoFileChooser == 0) {
-                Produto produto = new Produto(txtNome.getText(), Float.parseFloat(txtPreco.getText()), navegador.getSelectedFile().getPath());
+                    JOptionPane.showMessageDialog(this, "Editado com sucesso!");
 
-                gerProduto.editar(produto, cmbSelecionarProduto.getSelectedIndex());
+                    estadoPosEditarSalvar();
+                } else {
+                    Produto produto = new Produto(txtNome.getText(), Double.parseDouble(txtPreco.getText()));
 
-                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
+                    gerProduto.editar(produto, cmbSelecionarProduto.getSelectedIndex());
 
-                estadoPosEditarSalvar();
-            } else {
-                Produto produto = new Produto(txtNome.getText(), Float.parseFloat(txtPreco.getText()));
+                    JOptionPane.showMessageDialog(this, "Editado com sucesso!");
 
-                gerProduto.editar(produto, cmbSelecionarProduto.getSelectedIndex());
-
-                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
-
-                estadoPosEditarSalvar();
-
+                    estadoPosEditarSalvar();
+                    listarProdutos();
+                }
             }
-
         }
-
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void cmbSelecionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSelecionarProdutoActionPerformed
-        // TODO add your handling code here:
-        preencheCampos();
+        try {
+            preencheCampos();
+        } catch (Exception e) {
+            return;
+        }
     }//GEN-LAST:event_cmbSelecionarProdutoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         estadoEditar();
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private void listarProdutos() {
+        cmbSelecionarProduto.removeAllItems();
+        gerProduto.relatorio().forEach(el -> cmbSelecionarProduto.addItem(String.valueOf(el.getNome())));
+    }
 
     private void estadoEditar() {
         txtNome.setEnabled(true);
@@ -296,27 +315,17 @@ public class ConsultaProdutos extends javax.swing.JInternalFrame {
         btnSalvar.setEnabled(false);
         btnEditar.setEnabled(true);
     }
-    
+
     private void preencheCampos() {
-        
+
         txtNome.setText(gerProduto.consultar(cmbSelecionarProduto.getSelectedIndex()).getNome());
         txtPreco.setText(String.valueOf(gerProduto.consultar(cmbSelecionarProduto.getSelectedIndex()).getPreco()));
         carregaImagem(gerProduto.consultar(cmbSelecionarProduto.getSelectedIndex()).getCaminhoImagem());
     }
-    
+
     private void limparCampos() {
         txtNome.setText("");
         txtPreco.setText("");
-        carregaImagem(imagemDefault);
-    }
-
-    private void estadoInicial() {
-        txtNome.setEnabled(false);
-        txtPreco.setEnabled(false);
-        btnImagem.setEnabled(false);
-        btnSalvar.setEnabled(false);
-        btnEditar.setEnabled(true);
-        limparCampos();
         carregaImagem(imagemDefault);
     }
 
@@ -344,7 +353,6 @@ public class ConsultaProdutos extends javax.swing.JInternalFrame {
                 return false;
         }
     }
-
 
     private void carregaImagem(String caminhoImagem) {
         BufferedImage imagem;
