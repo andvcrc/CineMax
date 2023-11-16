@@ -122,14 +122,14 @@ public class Vender extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Vendas");
-        setMaximumSize(new java.awt.Dimension(1098, 648));
-        setMinimumSize(new java.awt.Dimension(1098, 648));
+        setMaximumSize(new java.awt.Dimension(1400, 800));
+        setMinimumSize(new java.awt.Dimension(1334, 634));
         setNormalBounds(new java.awt.Rectangle(0, 0, 1098, 648));
-        setPreferredSize(new java.awt.Dimension(1098, 648));
+        setPreferredSize(new java.awt.Dimension(1334, 634));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMaximumSize(new java.awt.Dimension(1086, 604));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1086, 604));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1400, 800));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1318, 604));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carrinho-grande.png"))); // NOI18N
@@ -709,7 +709,6 @@ public class Vender extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRemoveClienteActionPerformed
 
     private void btnAdicionarPoltronaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarPoltronaActionPerformed
-
         try {
             if (radioInteira.isSelected() || radioNaoPg.isSelected() || radioMeia.isSelected()) {
                 float tipo = 0;
@@ -720,7 +719,7 @@ public class Vender extends javax.swing.JInternalFrame {
                 } else if (radioNaoPg.isSelected()) {
                     tipo = 0;
                 }
-                Venda venda = new Venda("Ingresso", tipo);
+                Venda venda = new Venda("Ing. Poltrona 0" + cmbPoltrona.getSelectedItem().toString(), tipo);
                 carrinhoDeCompras.addRow(venda);
                 updateValorTotal();
                 ingressos.add(Integer.valueOf(cmbPoltrona.getSelectedItem().toString()));
@@ -728,7 +727,6 @@ public class Vender extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione um tipo de ingresso!");
             }
-            preencherPoltronas();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnAdicionarPoltronaActionPerformed
