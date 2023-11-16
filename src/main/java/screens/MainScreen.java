@@ -112,6 +112,8 @@ public class MainScreen extends javax.swing.JFrame {
             .addGap(0, 412, Short.MAX_VALUE)
         );
 
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/registro.png"))); // NOI18N
         jMenu1.setText("Cadastros   |");
         jMenu1.setMaximumSize(new java.awt.Dimension(110, 38));
@@ -385,7 +387,6 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastroSessaoActionPerformed
 
     private void consultaSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaSessaoActionPerformed
-        ConsultaSessao conSessao = new ConsultaSessao(gerFilmes, gerSalas, gerSessao);
         if (gerSessao.relatorio().isEmpty() || gerFilmes.relatorio().isEmpty() || gerSalas.relatorio().isEmpty()) {
             if(gerSessao.relatorio().isEmpty())
                JOptionPane.showMessageDialog(this, "Nenhuma sessão cadastrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -394,6 +395,7 @@ public class MainScreen extends javax.swing.JFrame {
             if(gerSalas.relatorio().isEmpty())
                 JOptionPane.showMessageDialog(this, "Nenhuma sala cadastrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
         } else {
+            ConsultaSessao conSessao = new ConsultaSessao(gerFilmes, gerSalas, gerSessao);
             if (conSessao.isVisible()) {
                 conSessao.toFront();
                 conSessao.requestFocus();
