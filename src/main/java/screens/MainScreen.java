@@ -99,7 +99,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel2.setText("CineMax - Desenvolvido por André Victor Ribeiro Carvalho");
         jPanel1.add(jLabel2);
 
-        telaDesktop.setBackground(new java.awt.Color(102, 153, 255));
+        telaDesktop.setBackground(new java.awt.Color(62, 130, 195));
 
         javax.swing.GroupLayout telaDesktopLayout = new javax.swing.GroupLayout(telaDesktop);
         telaDesktop.setLayout(telaDesktopLayout);
@@ -116,12 +116,14 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/registro.png"))); // NOI18N
         jMenu1.setText("Cadastros   |");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMenu1.setMaximumSize(new java.awt.Dimension(110, 38));
         jMenu1.setMinimumSize(new java.awt.Dimension(110, 38));
         jMenu1.setPreferredSize(new java.awt.Dimension(110, 38));
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/filme.png"))); // NOI18N
         jMenu4.setText("Filmes");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         cadastroFilmes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
         cadastroFilmes.setText("Cadastrar");
@@ -145,6 +147,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sala.png"))); // NOI18N
         jMenu5.setText("Salas");
+        jMenu5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         cadastroSalas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
         cadastroSalas.setText("Cadastrar");
@@ -168,6 +171,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refrigerante.png"))); // NOI18N
         jMenu7.setText("Produtos");
+        jMenu7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         cadastroProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
         cadastroProdutos.setText("Cadastrar");
@@ -191,6 +195,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sessao.png"))); // NOI18N
         jMenu8.setText("Sessão");
+        jMenu8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         cadastroSessao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
         cadastroSessao.setText("Cadastro");
@@ -216,7 +221,9 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reservas.png"))); // NOI18N
         jMenu2.setText("Vendas   |");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        btnVender.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carrinho.png"))); // NOI18N
         btnVender.setText("Vender");
         btnVender.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +233,7 @@ public class MainScreen extends javax.swing.JFrame {
         });
         jMenu2.add(btnVender);
 
+        btnConsultarVenda.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnConsultarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
         btnConsultarVenda.setText("Consultar Venda");
         btnConsultarVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -239,11 +247,14 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/relatorio.png"))); // NOI18N
         jMenu3.setText("Relatórios   |");
+        jMenu3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        jMenuItem3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/filme.png"))); // NOI18N
         jMenuItem3.setText("Filmes");
         jMenu3.add(jMenuItem3);
 
+        jMenuItem4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sala.png"))); // NOI18N
         jMenuItem4.setText("Salas");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -253,6 +264,7 @@ public class MainScreen extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem4);
 
+        jMenuItem5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refrigerante.png"))); // NOI18N
         jMenuItem5.setText("Produtos");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -262,10 +274,12 @@ public class MainScreen extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem5);
 
+        jMenuItem6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sessao.png"))); // NOI18N
         jMenuItem6.setText("Sessao");
         jMenu3.add(jMenuItem6);
 
+        jMenuItem7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carrinho.png"))); // NOI18N
         jMenuItem7.setText("Vendas");
         jMenu3.add(jMenuItem7);
@@ -275,6 +289,7 @@ public class MainScreen extends javax.swing.JFrame {
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sair.png"))); // NOI18N
         jMenu6.setText("Sair");
         jMenu6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenu6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu6MouseClicked(evt);

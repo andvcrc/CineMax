@@ -75,52 +75,52 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(745, 520));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar grande.png"))); // NOI18N
         jLabel1.setText("Novo Filme");
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Cartaz:");
 
-        txtTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Classificação:");
 
-        cmbClassificacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbClassificacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cmbClassificacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livre", "10 Anos", "12 Anos", "14 Anos", "16 Anos", "18 Anos" }));
         cmbClassificacao.setToolTipText("Selecione");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Diretor:");
 
-        txtDiretor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtDiretor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Gênero Principal:");
 
-        txtGenero.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtGenero.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Duração (minutos):");
 
-        txtDuracao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtDuracao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Ano:");
 
-        txtAno.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtAno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel8.setText("Sinopse:");
 
         txtSinopse.setColumns(20);
-        txtSinopse.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtSinopse.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSinopse.setLineWrap(true);
         txtSinopse.setRows(5);
         jScrollPane1.setViewportView(txtSinopse);
 
-        btnConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnConfirmar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirme.png"))); // NOI18N
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +129,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLimpar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnLimpar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/limpar.png"))); // NOI18N
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -138,10 +138,10 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Título:");
 
-        btnSelecionar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnSelecionar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar grande.png"))); // NOI18N
         btnSelecionar.setText("Selecionar");
         btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +201,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel6)
                                     .addGap(193, 193, 193)))
                             .addComponent(jScrollPane1))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,14 +243,14 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnLimpar))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

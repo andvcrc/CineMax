@@ -90,59 +90,59 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar grande.png"))); // NOI18N
         jLabel1.setText("Consultar Filmes");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Título:");
 
-        txtTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtTitulo.setEnabled(false);
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Classificação:");
 
-        cmbClassificacao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbClassificacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cmbClassificacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livre", "10 Anos", "12 Anos", "14 Anos", "16 Anos", "18 Anos" }));
         cmbClassificacao.setToolTipText("Selecione");
         cmbClassificacao.setEnabled(false);
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Diretor:");
 
-        txtDiretor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtDiretor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtDiretor.setEnabled(false);
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Gênero:");
 
-        txtGenero.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtGenero.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtGenero.setEnabled(false);
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Duração (hh:mm):");
 
-        txtDuracao.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtDuracao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtDuracao.setEnabled(false);
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Ano:");
 
-        txtAno.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtAno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtAno.setEnabled(false);
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Sinopse:");
 
         txtSinopse.setColumns(20);
-        txtSinopse.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtSinopse.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSinopse.setLineWrap(true);
         txtSinopse.setRows(5);
         txtSinopse.setEnabled(false);
         jScrollPane1.setViewportView(txtSinopse);
 
-        btnSalvar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirme.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
@@ -152,7 +152,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
             }
         });
 
-        btnExcluir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnExcluir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excluir.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
@@ -172,20 +172,20 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel10.setText("Selecione um filme:");
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Cartaz:");
 
-        cmbSelecionarFilme.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbSelecionarFilme.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cmbSelecionarFilme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSelecionarFilmeActionPerformed(evt);
             }
         });
 
-        btnEditar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editar.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
@@ -195,7 +195,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
@@ -243,7 +243,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(btnImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel2)
@@ -286,7 +286,7 @@ public class ConsultaFilmes extends javax.swing.JInternalFrame {
                     .addComponent(cmbSelecionarFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()

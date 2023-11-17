@@ -82,16 +82,16 @@ public class ConsultaProdutos extends javax.swing.JInternalFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar grande.png"))); // NOI18N
         jLabel1.setText("Consultar Produtos");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nome:");
 
-        txtNome.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNome.setEnabled(false);
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Preço:");
 
-        txtPreco.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtPreco.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPreco.setEnabled(false);
 
         btnSalvar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -115,17 +115,17 @@ public class ConsultaProdutos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Produto:");
 
-        cmbSelecionarProduto.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbSelecionarProduto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cmbSelecionarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSelecionarProdutoActionPerformed(evt);
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel11.setText("Selecione um produto:");
 
         btnEditar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -163,9 +163,7 @@ public class ConsultaProdutos extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtPreco, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                                     .addComponent(txtNome)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(112, 112, 112))))
+                            .addComponent(jLabel9)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel11)

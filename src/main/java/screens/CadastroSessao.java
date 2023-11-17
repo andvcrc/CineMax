@@ -83,7 +83,7 @@ public class CadastroSessao extends javax.swing.JInternalFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar grande.png"))); // NOI18N
         jLabel1.setText("Nova Sessão");
 
-        btnConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnConfirmar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirme.png"))); // NOI18N
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +92,7 @@ public class CadastroSessao extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLimpar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnLimpar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar.png"))); // NOI18N
         btnLimpar.setText("Cancelar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,14 +101,14 @@ public class CadastroSessao extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbFilme.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbFilme.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cmbFilme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbFilmeActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Selecione um filme:");
 
         btnImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cartaz.png"))); // NOI18N
@@ -116,27 +116,27 @@ public class CadastroSessao extends javax.swing.JInternalFrame {
         btnImagem.setMinimumSize(new java.awt.Dimension(180, 260));
         btnImagem.setPreferredSize(new java.awt.Dimension(180, 260));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Data/Horário:");
 
-        cmbSala.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbSala.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cmbSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSalaActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Selecione uma sala:");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Estado da sala:");
 
-        cmbEstado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        cmbEstado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Em condição de uso", "Sem condição de uso", "Em manutenção" }));
         cmbEstado.setEnabled(false);
 
-        spnData.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        spnData.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         spnData.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1699135360296L), null, java.util.Calendar.DAY_OF_MONTH));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -211,7 +211,7 @@ public class CadastroSessao extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
         );
 
         pack();
