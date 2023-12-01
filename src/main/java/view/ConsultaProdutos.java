@@ -36,7 +36,7 @@ public class ConsultaProdutos extends javax.swing.JInternalFrame {
     public ConsultaProdutos(GerenciaProduto gerProduto) {
         this.gerProduto = gerProduto;
         initComponents();
-        gerProduto.relatorio().forEach(el -> cmbSelecionarProduto.addItem(String.valueOf(el.getNome())));
+        gerProduto.relatorio().forEach(el -> cmbSelecionarProduto.addItem(String.valueOf(el.getProduto())));
         removeFiltrosDeBusca();
     }
 
@@ -295,7 +295,7 @@ public class ConsultaProdutos extends javax.swing.JInternalFrame {
 
     private void listarProdutos() {
         cmbSelecionarProduto.removeAllItems();
-        gerProduto.relatorio().forEach(el -> cmbSelecionarProduto.addItem(String.valueOf(el.getNome())));
+        gerProduto.relatorio().forEach(el -> cmbSelecionarProduto.addItem(String.valueOf(el.getProduto())));
     }
 
     private void estadoEditar() {
@@ -316,8 +316,8 @@ public class ConsultaProdutos extends javax.swing.JInternalFrame {
 
     private void preencheCampos() {
 
-        txtNome.setText(gerProduto.consultar(cmbSelecionarProduto.getSelectedIndex()).getNome());
-        txtPreco.setText(String.valueOf(gerProduto.consultar(cmbSelecionarProduto.getSelectedIndex()).getPreco()));
+        txtNome.setText(gerProduto.consultar(cmbSelecionarProduto.getSelectedIndex()).getProduto());
+        txtPreco.setText(String.valueOf(gerProduto.consultar(cmbSelecionarProduto.getSelectedIndex()).getValor()));
         carregaImagem(gerProduto.consultar(cmbSelecionarProduto.getSelectedIndex()).getCaminhoImagem());
     }
 

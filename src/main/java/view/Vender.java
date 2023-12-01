@@ -711,7 +711,7 @@ public class Vender extends javax.swing.JInternalFrame {
     private void btnAdicionarPoltronaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarPoltronaActionPerformed
         try {
             if (radioInteira.isSelected() || radioNaoPg.isSelected() || radioMeia.isSelected()) {
-                float tipo = 0;
+                int tipo = 0;
                 if (radioInteira.isSelected()) {
                     tipo = 30;
                 } else if (radioMeia.isSelected()) {
@@ -719,7 +719,7 @@ public class Vender extends javax.swing.JInternalFrame {
                 } else if (radioNaoPg.isSelected()) {
                     tipo = 0;
                 }
-                Venda venda = new Venda("Ing. Poltrona 0" + cmbPoltrona.getSelectedItem().toString(), tipo);
+                Venda venda = new Venda("Ing. Poltrona 0" + cmbPoltrona.getSelectedItem().toString(), Double.valueOf(tipo));
                 carrinhoDeCompras.addRow(venda);
                 updateValorTotal();
                 ingressos.add(Integer.valueOf(cmbPoltrona.getSelectedItem().toString()));
@@ -761,8 +761,8 @@ public class Vender extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             Venda venda = new Venda(
-                gerProduto.consultar(cmbProdutos.getSelectedIndex()).getNome(),
-                gerProduto.consultar(cmbProdutos.getSelectedIndex()).getPreco());
+                gerProduto.consultar(cmbProdutos.getSelectedIndex()).getProduto(),
+                gerProduto.consultar(cmbProdutos.getSelectedIndex()).getValor());
             carrinhoDeCompras.addRow(venda);
             updateValorTotal();
         } catch (Exception e) {
@@ -794,7 +794,7 @@ public class Vender extends javax.swing.JInternalFrame {
     private void preencherProdutos() {
         try {
             cmbProdutos.removeAllItems();
-            gerProduto.relatorio().forEach(el -> cmbProdutos.addItem(el.getNome()));
+            gerProduto.relatorio().forEach(el -> cmbProdutos.addItem(el.getProduto()));
         } catch (Exception e) {
             return;
         }

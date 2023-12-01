@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class CarrinhoDeCompras extends AbstractTableModel {
 
     private List<Venda> listaVendas = new ArrayList<Venda>();
-    private String[] columns = {"Item", "Valor"};
+    private String[] columns = {"Produto", "Valor"};
     private double valorTotal = 0;
 
     public CarrinhoDeCompras() {
@@ -42,7 +42,7 @@ public class CarrinhoDeCompras extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return listaVendas.get(rowIndex).getItem();
+                return listaVendas.get(rowIndex).getProduto();
             case 1:
                 return listaVendas.get(rowIndex).getValor();
         }
@@ -73,6 +73,5 @@ public class CarrinhoDeCompras extends AbstractTableModel {
         } else 
             return 0;   
     }
-    
     
 }

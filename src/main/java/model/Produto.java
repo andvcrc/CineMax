@@ -8,19 +8,16 @@ package model;
  *
  * @author Andre
  */
-public class Produto {
-    private String nome;
-    private double preco;
+public class Produto extends Venda {
+        
     private String caminhoImagem;
-
-    public Produto(String nome, double preco) {
-        this.nome = nome;
-        this.preco = preco;
+    
+    public Produto(String produto, double valor) {
+        super(produto, valor);
     }
 
-    public Produto(String nome, double preco, String caminhoImagem) {
-        this.nome = nome;
-        this.preco = preco;
+    public Produto(String produto, double valor, String caminhoImagem) {
+        super(produto, valor);
         this.caminhoImagem = caminhoImagem;
     }
 
@@ -31,21 +28,5 @@ public class Produto {
     public void setCaminhoImagem(String caminhoImagem) {
         this.caminhoImagem = caminhoImagem;
     }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-    
+  
 }

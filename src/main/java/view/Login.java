@@ -62,7 +62,6 @@ public class Login extends javax.swing.JFrame {
         btnLogin.setText("Entrar");
         btnLogin.setBorder(null);
         btnLogin.setBorderPainted(false);
-        btnLogin.setOpaque(false);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -73,7 +72,6 @@ public class Login extends javax.swing.JFrame {
         btnSair.setText("Sair");
         btnSair.setBorder(null);
         btnSair.setBorderPainted(false);
-        btnSair.setOpaque(false);
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);

@@ -24,7 +24,7 @@ public class GerenciaProduto {
         } else {
 
             for (int i = 0; i < listaProdutos.size(); i++) {
-                if (listaProdutos.get(i).getNome().equals(produto.getNome())) {
+                if (listaProdutos.get(i).getProduto().equals(produto.getProduto())) {
                     return false;
                 } 
             }
@@ -38,8 +38,8 @@ public class GerenciaProduto {
     }
     
     public void editar(Produto produto, int index) {
-        listaProdutos.get(index).setNome(produto.getNome());
-        listaProdutos.get(index).setPreco(produto.getPreco());
+        listaProdutos.get(index).setProduto(produto.getProduto());
+        listaProdutos.get(index).setValor(produto.getValor());
         if (produto.getCaminhoImagem() == null) {
             return;
         } else {

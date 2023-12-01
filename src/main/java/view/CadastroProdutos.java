@@ -221,7 +221,7 @@ public class CadastroProdutos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Número inválido!", "Erro!", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                Produto produto = new Produto(txtNome.getText(), Integer.parseInt(txtPreco.getText()), navegador.getSelectedFile().getPath());
+                Produto produto = new Produto(txtNome.getText(), Double.parseDouble(txtPreco.getText()), navegador.getSelectedFile().getPath());
 
                 boolean status = gerProduto.adicionar(produto);
                 if (status == false) {

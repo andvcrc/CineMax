@@ -9,27 +9,27 @@ package model;
  * @author Andre
  */
 public class Venda {
-    private String item;
+    private String produto;
     private double valor;
 
-    public Venda(String item, double valor) {
-        this.item = item;
+    public Venda(String produto, double valor) {
+        this.produto = produto;
         this.valor = valor;
     }
 
-    public String getItem() {
-        return item;
+    public String getProduto() {
+        return produto;
     }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setProduto(String produto) {
+        this.produto = produto;
     }
 
     public double getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
     

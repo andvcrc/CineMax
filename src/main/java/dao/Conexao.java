@@ -29,10 +29,10 @@ public class Conexao {
             
             Properties props = new Properties();
             props.put("user", "postgres");
-            props.put("password", "123456");
+            props.put("password", "andre123321");
             
             return DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/ExemploConexao", props);
+                    "cinemaxdb.c5p6aweocf2l.sa-east-1.rds.amazonaws.com", props);
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }

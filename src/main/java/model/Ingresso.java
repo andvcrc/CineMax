@@ -8,17 +8,14 @@ package model;
  *
  * @author Andre
  */
-public class Ingresso {
-    private Sessao sessao;
-    private String tipo;
-    private double preco;
-
-    public Ingresso(Sessao sessao, String tipo, double preco) {
-        this.sessao = sessao;
-        this.tipo = tipo;
-        this.preco = preco;
-    }
+public class Ingresso extends Venda {
     
+    private Sessao sessao;
+    
+    public Ingresso(String produto, double valor, Sessao sessao) {
+        super(produto, valor);
+        this.sessao = sessao;
+    }
 
     public Sessao getSessao() {
         return sessao;
@@ -28,21 +25,4 @@ public class Ingresso {
         this.sessao = sessao;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-    
-    
 }
