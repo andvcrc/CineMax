@@ -4,22 +4,28 @@
  */
 package model;
 
-import model.Venda;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Andre
  */
-public class CarrinhoDeCompras extends AbstractTableModel {
+public class Carrinho extends AbstractTableModel {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private List<Venda> listaVendas = new ArrayList<Venda>();
-    private String[] columns = {"Produto", "Valor"};
+    private final List<Venda> listaVendas = new ArrayList<>();
+    private final String[] columns = {"Produto", "Valor"};
     private double valorTotal = 0;
 
-    public CarrinhoDeCompras() {
+    public Carrinho() {
 
     }
 
@@ -39,12 +45,12 @@ public class CarrinhoDeCompras extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public Venda getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return listaVendas.get(rowIndex).getProduto();
+                return listaVendas.get(rowIndex);
             case 1:
-                return listaVendas.get(rowIndex).getValor();
+                return listaVendas.get(rowIndex);
         }
         return null;
     }

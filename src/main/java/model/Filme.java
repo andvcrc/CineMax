@@ -4,11 +4,21 @@
  */
 package model;
 
+import javax.persistence.*;
+
 /**
  *
  * @author Andre
  */
+
+@Entity
+@Table(name = "filme")
 public class Filme {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
     private String titulo;
     private String genero;
     private String sinopse;

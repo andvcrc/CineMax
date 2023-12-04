@@ -4,8 +4,10 @@
  */
 package control;
 
+import dao.FilmeDAO;
 import model.Filme;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,15 +22,16 @@ public class GerenciaFilme {
 
     public void adicionar(Filme filme) {
         listaFilme.add(filme);
-
+        new FilmeDAO().salvar(filme);
     }
 
     public Filme consultar(int posicao) {
-        return (listaFilme.get(posicao));
+        //return (listaFilme.get(posicao));
+        return new FilmeDAO().encontrar(posicao);
     }
 
-    public ArrayList<Filme> relatorio() {
-        return listaFilme;
+    public List<Filme> relatorio() {
+        return new FilmeDAO().getList();
     }
 
     public void editar(Filme filme, int posicao) {

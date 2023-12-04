@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import control.GerenciaFilme;
 import control.GerenciaSala;
 import control.GerenciaSessao;
+import java.util.Date;
 
 /**
  *
@@ -266,10 +267,11 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Não foi possível alterar pois a sala selecionada está indisponível!", "Erro!", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                Sessao sessao = new Sessao(gerFilme.consultar(cmbFilme.getSelectedIndex()), gerSala.consultar(cmbSala.getSelectedIndex()), spnData.getValue());
+                Sessao sessao = new Sessao(gerFilme.consultar(cmbFilme.getSelectedIndex()), gerSala.consultar(cmbSala.getSelectedIndex()), (Date) spnData.getValue());
                 gerSessao.editar(sessao, cmbSelecionarSessao.getSelectedIndex());
                 JOptionPane.showMessageDialog(this, "Sessão alterada!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e) {
+                System.out.println("Erro: " + e);
                 JOptionPane.showMessageDialog(this, "Não foi possível alterar. Revise os campos e tente novamente!", "Erro!", JOptionPane.ERROR_MESSAGE);
             }
             estadoInicial();
@@ -291,6 +293,7 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
             filme = gerFilme.consultar(cmbFilme.getSelectedIndex());
             carregaImagem(filme.getCaminhoImagem());
         } catch (Exception e) {
+            System.out.println("Erro: " + e);
             return;
         }
     }//GEN-LAST:event_cmbFilmeItemStateChanged
@@ -308,6 +311,7 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
             sala = gerSala.consultar(cmbSala.getSelectedIndex());
             cmbEstado.setSelectedIndex(sala.getStatus());
         } catch (Exception e) {
+            System.out.println("Erro: " + e);
             return;
         }
     }//GEN-LAST:event_cmbSalaItemStateChanged
@@ -323,15 +327,17 @@ public class ConsultaSessao extends javax.swing.JInternalFrame {
             try {
                 imagem = ImageIO.read(file);
                 btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 260, 100)));
-            } catch (IOException ex) {
-                Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, "Imagem não encontrada!", ex);
+            } catch (IOException e) {
+                System.out.println("Erro: " + e);
+                Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, "Imagem não encontrada!");
             }
         } else {
             try {
                 imagem = ImageIO.read(file);
                 btnImagem.setIcon(new ImageIcon(imagem));
-            } catch (IOException ex) {
-                Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, "Imagem não encontrada!", ex);
+            } catch (IOException e) {
+                System.out.println("Erro: " + e);
+                Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, "Imagem não encontrada!");
             }
         }
     }

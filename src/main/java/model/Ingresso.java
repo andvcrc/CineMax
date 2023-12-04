@@ -4,11 +4,19 @@
  */
 package model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author Andre
  */
 public class Ingresso extends Venda {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     
     private Sessao sessao;
     

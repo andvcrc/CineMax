@@ -6,8 +6,8 @@ package view;
 
 import model.Venda;
 import java.util.ArrayList;
-import model.CarrinhoDeCompras;
-import control.GerenciaCarrinhoDeCompras;
+import model.Carrinho;
+import control.GerenciaCarrinho;
 
 /**
  *
@@ -15,15 +15,15 @@ import control.GerenciaCarrinhoDeCompras;
  */
 public class ConsultarVenda extends javax.swing.JInternalFrame {
 
-    CarrinhoDeCompras carrinhoDeCompras = new CarrinhoDeCompras();
-    GerenciaCarrinhoDeCompras gerCarrinho;
+    Carrinho carrinhoDeCompras = new Carrinho();
+    GerenciaCarrinho gerCarrinho;
 
     /**
      * Creates new form Vender
      *
      * @param carrinhoDeCompras
      */
-    public ConsultarVenda(GerenciaCarrinhoDeCompras gerCarrinho) {
+    public ConsultarVenda(GerenciaCarrinho gerCarrinho) {
         initComponents();
         this.gerCarrinho = gerCarrinho;
         //tableCarrinhoDeCompras.setModel(carrinhoDeCompras);

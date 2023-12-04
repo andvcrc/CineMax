@@ -17,8 +17,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import model.CarrinhoDeCompras;
-import control.GerenciaCarrinhoDeCompras;
+import model.Carrinho;
+import control.GerenciaCarrinho;
 import control.GerenciaIngresso;
 import control.GerenciaProduto;
 import control.GerenciaSessao;
@@ -32,8 +32,8 @@ public class Vender extends javax.swing.JInternalFrame {
     GerenciaSessao gerSessao;
     GerenciaProduto gerProduto;
     String imagemDefault = "src/main/resources/images/cartaz.png";
-    GerenciaCarrinhoDeCompras gerCarrinho;
-    CarrinhoDeCompras carrinhoDeCompras = new CarrinhoDeCompras();
+    GerenciaCarrinho gerCarrinho;
+    Carrinho carrinhoDeCompras = new Carrinho();
 
     private ArrayList<Integer> ingressos = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class Vender extends javax.swing.JInternalFrame {
      * @param gerProduto
      * @param gerCarrinho
      */
-    public Vender(GerenciaSessao gerSessao, GerenciaProduto gerProduto, GerenciaCarrinhoDeCompras gerCarrinho) {
+    public Vender(GerenciaSessao gerSessao, GerenciaProduto gerProduto, GerenciaCarrinho gerCarrinho) {
         initComponents();
         tableCarrinhoDeCompras.setModel(carrinhoDeCompras);
         this.gerCarrinho = gerCarrinho;

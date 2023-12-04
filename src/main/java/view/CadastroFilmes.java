@@ -5,7 +5,6 @@
 package view;
 
 import model.Filme;
-import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
@@ -284,6 +283,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
                     gerFilme.adicionar(filme);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nRevise os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("Erro: " + e);
                     return;
                 }
                 JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");

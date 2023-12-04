@@ -5,20 +5,29 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Andre
  */
 public class Sessao {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
     private Filme filme;
     private Sala sala;
-    private Object dataHora;
+    private Date dataHora;
     private List<Integer> poltronasReservadas = new ArrayList<Integer>();
     private ArrayList<Integer> poltronas = new ArrayList<Integer>();
 
-    public Sessao(Filme filme, Sala sala, Object dataHora, ArrayList<Integer> poltronas) {
+    public Sessao(Filme filme, Sala sala, Date dataHora, ArrayList<Integer> poltronas) {
         this.filme = filme;
         this.sala = sala;
         this.dataHora = dataHora;
@@ -27,7 +36,7 @@ public class Sessao {
         }
     }
 
-    public Sessao(Filme filme, Sala sala, Object dataHora) {
+    public Sessao(Filme filme, Sala sala, Date dataHora) {
         this.filme = filme;
         this.sala = sala;
         this.dataHora = dataHora;
@@ -55,11 +64,11 @@ public class Sessao {
         this.sala = sala;
     }
 
-    public Object getDataHora() {
+    public Date getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(Object hora) {
+    public void setDataHora(Date hora) {
         this.dataHora = hora;
     } 
 

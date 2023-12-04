@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import control.GerenciaFilme;
 import control.GerenciaSala;
 import control.GerenciaSessao;
+import java.util.Date;
 
 /**
  *
@@ -223,9 +224,10 @@ public class CadastroSessao extends javax.swing.JInternalFrame {
             return;
         }
         try {
-            Sessao sessao = new Sessao(filme, sala, spnData.getValue());
+            Sessao sessao = new Sessao(filme, sala, (Date) spnData.getValue());
             gerSessao.adicionar(sessao);
         } catch (Exception e) {
+            System.out.println("Erro: " + e);
             JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nRevise os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -258,6 +260,7 @@ public class CadastroSessao extends javax.swing.JInternalFrame {
                 imagem = ImageIO.read(file);
                 btnImagem.setIcon(new ImageIcon(imagem.getScaledInstance(180, 260, 100)));
             } catch (IOException ex) {
+                System.out.println("Erro: " + ex);
                 Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, "Imagem não encontrada!", ex);
             }
         } else {
@@ -265,6 +268,7 @@ public class CadastroSessao extends javax.swing.JInternalFrame {
                 imagem = ImageIO.read(file);
                 btnImagem.setIcon(new ImageIcon(imagem));
             } catch (IOException ex) {
+                System.out.println("Erro: " + ex);
                 Logger.getLogger(ConsultaFilmes.class.getName()).log(Level.SEVERE, "Imagem não encontrada!", ex);
             }
         }

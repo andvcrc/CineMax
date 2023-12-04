@@ -8,7 +8,7 @@ import java.awt.Component;
 import java.awt.Toolkit;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import control.GerenciaCarrinhoDeCompras;
+import control.GerenciaCarrinho;
 import control.GerenciaFilme;
 import control.GerenciaProduto;
 import control.GerenciaSala;
@@ -27,7 +27,7 @@ public class MainScreen extends javax.swing.JFrame {
     GerenciaProduto gerProdutos = new GerenciaProduto();
     CadastroProdutos cadProdutos = new CadastroProdutos(gerProdutos);
     GerenciaSessao gerSessao = new GerenciaSessao();
-    GerenciaCarrinhoDeCompras gerCarrinho = new GerenciaCarrinhoDeCompras();
+    GerenciaCarrinho gerCarrinho = new GerenciaCarrinho();
     
     
     String imagemDefault = "src/main/resources/images/logo-icon.png";

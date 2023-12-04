@@ -4,12 +4,20 @@
  */
 package model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author Andre
  */
 public class Produto extends Venda {
         
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
     private String caminhoImagem;
     
     public Produto(String produto, double valor) {
