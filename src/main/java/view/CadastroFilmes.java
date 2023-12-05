@@ -283,7 +283,7 @@ public class CadastroFilmes extends javax.swing.JInternalFrame {
                     gerFilme.adicionar(filme);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Não foi possível adicionar! \nRevise os campos e tente novamente.", "Erro!", JOptionPane.ERROR_MESSAGE);
-                    System.out.println("Erro: " + e);
+                    e.printStackTrace();
                     return;
                 }
                 JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");

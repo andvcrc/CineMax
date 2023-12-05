@@ -20,6 +20,7 @@ view\MainScreen$9.class
 view\CadastroProdutos$2.class
 view\ConsultaProdutos$4.class
 dao\SalaDAO.class
+util\JPAConectionFactory.class
 view\ConsultaSessao$7.class
 view\MainScreen$12.class
 view\ConsultaFilmes$3.class
@@ -49,6 +50,7 @@ view\CadastroSalas.class
 view\ConsultaProdutos$3.class
 view\ConsultaSalas$2.class
 view\ConsultaSessao$5.class
+model\Filme_.class
 view\ConsultaSessao.class
 view\CadastroProdutos$1.class
 view\CadastroSessao.class
