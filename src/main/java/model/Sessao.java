@@ -7,24 +7,40 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Andre
  */
+//@Entity
+@Table(name = "sessao")
 public class Sessao {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @Column(name = "filme")
     private Filme filme;
+    
+    @Column(name = "sala")
     private Sala sala;
+    
+    @Column(name = "data_hora")
     private Date dataHora;
+    
+    @Column(name = "poltronas_reservadas")
     private List<Integer> poltronasReservadas = new ArrayList<Integer>();
+    
+    @Column(name = "poltronas")
     private ArrayList<Integer> poltronas = new ArrayList<Integer>();
 
     public Sessao(Filme filme, Sala sala, Date dataHora, ArrayList<Integer> poltronas) {

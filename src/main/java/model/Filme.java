@@ -19,13 +19,28 @@ public class Filme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @Column(name = "titulo")
     private String titulo;
+    
+    @Column(name = "genero")
     private String genero;
+    
+    @Column(name = "sinopse")
     private String sinopse;
+    
+    @Column(name = "diretor")
     private String diretor;
+    
+    @Column(name = "pos_clas_indicativa")
     private int posClasIndicativa;
+    
+    @Column(name = "ano")
     private int ano;
+    
+    @Column(name = "duracao")
     private int duracao;
+    
+    @Column(name = "caminho_imagem")
     private String caminhoImagem;
 
     public Filme() {
